@@ -1,0 +1,57 @@
+pkgname=glibc
+ver=2.36
+url=http://ftp.gnu.org/gnu/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	sed '/MAKEFLAGS :=/s/)r/) -r/' -i Makerules
+	patch -Np1 -i ../glibc-2.36-fhs-1.patch
+	mkdir build && cd build
+	echo "rootsbindir=/usr/sbin" > configparms
+	../configure --prefix=/usr \
+		--disable-werror \
+		--enable-kernel=3.2 \
+		--enable-stack-protector=strong \
+		--with-headers=/usr/include
+		libc_cv_slibdir=/usr/lib
+	make
+	mkdir -p $DST/etc
+	touch $DST/etc/ld.so.conf
+	sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
+	make DESTDIR=$DST install
+	sed '/RTLDLIST=/s@/usr@@g' -i $DST/usr/bin/ldd
+	cp -v ../nscd/nscd.conf $DST/etc/nscd.conf
+	mkdir -pv $DST/var/cache/nscd
+	cat > $DST/etc/nsswitch.conf << "EOF"
+# Begin /etc/nsswitch.conf
+
+passwd: files
+group: files
+shadow: files
+
+hosts: files dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+# End /etc/nsswitch.conf
+EOF
+	cat > $DST/etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+/usr/local/lib
+/opt/lib
+
+EOF
+	cat >> $DST/etc/ld.so.conf << "EOF"
+# Add an include directory
+include /etc/ld.so.conf.d/*.conf
+
+EOF
+	mkdir -pv $DST/etc/ld.so.conf.d
+	cp ../../tzdata2022g.tar.gz $DST/
+}
