@@ -1,0 +1,14 @@
+pkgname=acl
+ver=2.3.1
+url=https://download.savannah.gnu.org/releases/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	./configure --prefix=/usr \
+        	--disable-static \
+        	--docdir=/usr/share/doc/acl-2.3.1
+	make
+	make DESTDIR=$DST install
+}

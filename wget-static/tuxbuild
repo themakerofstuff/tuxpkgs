@@ -1,0 +1,8 @@
+pkgname=wget-static
+ver=1.20.1
+
+buildpkg()
+{
+	install -m644 $DST/usr/bin
+	cp wget-static $DST/usr/bin/
+}

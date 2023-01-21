@@ -1,0 +1,12 @@
+pkgname=bc
+ver=6.2.2
+url=https://github.com/gavinhoward/bc/releases/download/$ver/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	CC=gcc ./configure --prefix=/usr -G -O3 -r
+	make
+	make DESTDIR=$DST install
+}
