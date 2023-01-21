@@ -1,0 +1,15 @@
+pkgname=sed
+ver=4.9
+url=https:/ftp.gnu.org/gnu/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	./configure --prefix=/usr
+	make
+	make html
+	make DESTDIR=$DST install
+	install -d -m755           $DST/usr/share/doc/sed-4.9
+	install -m644 doc/sed.html $DST/usr/share/doc/sed-4.9
+}
