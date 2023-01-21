@@ -1,0 +1,13 @@
+pkgname=zstd
+ver=1.5.2
+url=https://github.com/facebook/zstd/releases/download/v${ver}/$pkgname-$ver.tar.gz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.gz
+	cd $pkgname-$ver
+	patch -Np1 -i ../zstd-1.5.2-upstream_fixes-1.patch
+	make prefix=/usr
+	make prefix=/usr DESTDIR=$DST install
+	rm $DST/usr/lib/libzstd.a
+}

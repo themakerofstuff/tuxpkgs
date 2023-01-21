@@ -34,7 +34,8 @@ localedef -i tr_TR -f UTF-8 tr_TR.UTF-8
 localedef -i zh_CN -f GB18030 zh_CN.GB18030
 localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
 localedef -i zh_TW -f UTF-8 zh_TW.UTF-8
-tar -xf /tzdata2022g.tar.gz
+mkdir /tmp/tzdata -p
+tar -xf /tzdata2022g.tar.gz -C /tmp/tzdata
 
 ZONEINFO=/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}
@@ -46,7 +47,9 @@ for tz in etcetera southamerica northamerica europe africa antarctica  \
     zic -L leapseconds -d $ZONEINFO/right ${tz}
 done
 
-cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+cp -v /tmp/tzdata/zone.tab /tmp/tzdata/zone1970.tab /tmp/tzdata/iso3166.tab $ZONEINFO
 zic -d $ZONEINFO -p America/New_York
 unset ZONEINFO
+
+rm -rf /tmp/tzdata
 rm /tzdata2022g.tar.gz
