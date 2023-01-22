@@ -1,0 +1,15 @@
+pkgname=gawk
+ver=5.2.1
+url=https://ftp.gnu.org/gnu/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	sed -i s/extras// Makefile.in
+	./configure --prefix=/usr
+	make
+	make LN='ln -f' DESTDIR=$DST install
+	mkdir -pv                                   $DST/usr/share/doc/gawk-5.2.1
+	cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} $DST/usr/share/doc/gawk-5.2.1
+}

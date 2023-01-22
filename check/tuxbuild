@@ -1,0 +1,13 @@
+pkgname=check
+ver=0.125.2
+url=https://github.com/libcheck/check/releases/download/$ver/$pkgname-$ver.tar.gz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.gz
+	cd $pkgname-$ver
+	./configure --prefix=/usr \
+		--disable-static
+	make
+	make docdir=/usr/share/doc/check-0.15.2 DESTDIR=$DST install
+}

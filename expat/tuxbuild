@@ -1,0 +1,15 @@
+pkgname=expat
+ver=2.5.0
+url=https://prdownloads.sourceforge.net/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	./configure --prefix=/usr \
+		--disable-static \
+		--docdir=/usr/share/doc/expat-2.5.0
+	make
+	make DESTDIR=$DST install
+	install -v -m644 doc/*.{html,css} $DST/usr/share/doc/expat-2.5.0
+}

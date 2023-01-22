@@ -1,0 +1,13 @@
+pkgname=automake
+ver=1.16.5
+url=https://ftp.gnu.org/gnu/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	./configure --prefix=/usr \
+		--docdir=/usr/share/doc/automake-1.16.5
+	make
+	make DESTDIR=$DST install
+}

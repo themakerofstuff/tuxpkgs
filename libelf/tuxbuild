@@ -1,0 +1,17 @@
+pkgname=libelf
+ver=0.188
+url=https://sourceware.org/ftp/$pkgname/$ver/$pkgname-$ver.tar.bz2
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.bz2
+	cd $pkgname-$ver
+	./configure --prefix=/usr \
+		--disable-debuginfod \
+		--enable-libdebuginfod=dummy
+	make
+	make -C libelf install
+	mkdir -p $DST/usr/lib/pkgconfig
+	install -vm644 config/libelf.pc $DST/usr/lib/pkgconfig
+	rm $DST/usr/lib/libelf.a
+}

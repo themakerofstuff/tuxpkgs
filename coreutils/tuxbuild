@@ -1,0 +1,19 @@
+pkgname=coreutils
+ver=9.1
+url=https://ftp.gnu.org/gnu/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	patch -Np1 -i ../coreutils-9.1-i18n-1.patch
+	autoreconf -fiv
+	FORCE_UNSAFE_CONFIGURE=1 ./configure \
+        	--prefix=/usr \
+        	--enable-no-install-program=kill,uptime
+	make
+	make DESTDIR=$DST install	
+	mv -v $DST/usr/bin/chroot $DST/usr/sbin
+	mv -v $DST/usr/share/man/man1/chroot.1 $DST/usr/share/man/man8/chroot.8
+	sed -i 's/"1"/"8"/' $DST/usr/share/man/man8/chroot.8
+}

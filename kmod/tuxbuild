@@ -1,0 +1,22 @@
+pkgname=kmod
+ver=30
+url=https://kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$ver.tar.xz
+
+buildpkg()
+{
+	tar xf $pkgname-$ver.tar.xz
+	cd $pkgname-$ver
+	./configure --prefix=/usr \
+		--sysconfdir=/etc \
+		--with-openssl \
+		--with-xz \
+		--with-zstd \
+		--with-zlib
+	make
+	make DESTDIR=$DST install
+	for target in depmod insmod modinfo modprobe rmmod; do
+  		ln -sfv ../bin/kmod $DST/usr/sbin/$target
+	done
+
+	ln -sfv kmod $DST/usr/bin/lsmod
+}

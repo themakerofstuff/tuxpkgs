@@ -1,0 +1,12 @@
+pkgname=perl5-xml-parser
+ver=2.46
+url=https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-$ver.tar.gz
+
+buildpkg()
+{
+	tar xf XML-Parser-$ver.tar.gz
+	cd XML-Parser-$ver
+	perl Makefile.PL
+	make
+	make DESTDIR=$DST install
+}
