@@ -1,2 +1,0 @@
-ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/12.2.0/liblto_plugin.so \
-        /usr/lib/bfd-plugins/
