@@ -1,0 +1,10 @@
+{
+	"name": "test-package",
+	"version": "0.1",
+	"patches": false,
+	"filename": "index",
+	"url": "https://raw.githubusercontent.com/themakerofstuff/tuxpkgs/main/index",
+	"depends": [
+		"test-package-2"
+	]
+}
