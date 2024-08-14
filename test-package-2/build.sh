@@ -6,4 +6,6 @@ install_package() {
 	echo hi
 }
 
-post_install_package() {}
+post_install_package() {
+	echo hi
+}
