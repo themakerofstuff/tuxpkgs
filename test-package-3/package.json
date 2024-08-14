@@ -4,7 +4,7 @@
 	"patches": false,
 	"filename": "index",
 	"description":  "stuff",
-	"patch_files": "",
+	"patch_files": [],
 	"url": "https://raw.githubusercontent.com/themakerofstuff/tuxpkgs/main/index",
 	"depends": []
 }
