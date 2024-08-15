@@ -7,5 +7,5 @@ install_package() {
 }
 
 post_install_package() {
-	echo hi
+	echo
 }
