@@ -4,6 +4,7 @@ build_package() {
 
 install_package() {
 	echo hi
+	cp index $DST
 }
 
 post_install_package() {
