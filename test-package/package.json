@@ -1,6 +1,6 @@
 {
 	"name": "test-package",
-	"version": "0.1",
+	"version": "0.2",
 	"patches": false,
 	"filename": "index",
 	"description":  "stuff",
