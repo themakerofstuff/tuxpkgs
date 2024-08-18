@@ -4,7 +4,8 @@ build_package() {
 
 install_package() {
 	echo hi
-	cp index $DST
+	mkdir $DST/etc
+	cp index $DST/etc/
 }
 
 post_install_package() {
