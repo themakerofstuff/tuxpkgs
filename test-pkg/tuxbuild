@@ -1,0 +1,4 @@
+pkgname=test-pkg
+pkgver=0.1
+pkgurl=
+depends=(test-pkg1)
