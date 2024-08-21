@@ -1,0 +1,24 @@
+pkgname=binutils-cross-bootstrap
+pkgver=2.43.1
+pkgurls=(https://ftp.gnu.org/gnu/binutils/binutils-2.43.1.tar.xz)
+depends=()
+
+buildpkg() {
+	tar xf binutils-2.43.1.tar.xz
+	cd binutils-2.43.1
+	mkdir build
+	cd build
+	../configure --prefix=$ROOT/tools \
+             --with-sysroot=ROOT \
+             --target=$CC_TGT   \
+             --disable-nls       \
+             --enable-gprofng=no \
+             --disable-werror    \
+             --enable-new-dtags  \
+             --enable-default-hash-style=gnu
+	make || make -j1
+}
+
+installpkg() {
+	make install || make install -j1
+}
