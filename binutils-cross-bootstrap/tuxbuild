@@ -8,7 +8,7 @@ buildpkg() {
 	cd binutils-2.43.1
 	mkdir build
 	cd build
-	../configure --prefix=$ROOT/tools \
+	../configure --prefix=/tools \
              --with-sysroot=$ROOT \
              --target=$CC_TGT   \
              --disable-nls       \
