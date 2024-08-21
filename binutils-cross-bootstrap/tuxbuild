@@ -9,7 +9,7 @@ buildpkg() {
 	mkdir build
 	cd build
 	../configure --prefix=$ROOT/tools \
-             --with-sysroot=ROOT \
+             --with-sysroot=$ROOT \
              --target=$CC_TGT   \
              --disable-nls       \
              --enable-gprofng=no \
@@ -20,5 +20,5 @@ buildpkg() {
 }
 
 installpkg() {
-	make install || make install -j1
+	make DESTDIR=$DST install || make DESTDIR=$DST install -j1
 }
