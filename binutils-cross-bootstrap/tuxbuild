@@ -20,5 +20,6 @@ buildpkg() {
 }
 
 installpkg() {
+	cd binutils-2.43.1/build
 	make DESTDIR=$DST install || make DESTDIR=$DST install -j1
 }

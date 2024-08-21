@@ -44,6 +44,7 @@ buildpkg() {
 }
 
 installpkg() {
+	cd gcc-14.2.0/build
 	make DESTDIR=$DST install
 }
 
