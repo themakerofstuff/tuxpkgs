@@ -1,1 +1,18 @@
+pkgname=test-pkg1
+pkgver=0.2
+pkgurls=(https://nixos.org/nix/install)
 depends=()
+
+buildpkg() {
+	echo hello
+}
+
+installpkg() {
+	mkdir -p $DST/etc
+	cp install $DST
+}
+
+postinstpkg() {
+	echo post-install
+}
+	

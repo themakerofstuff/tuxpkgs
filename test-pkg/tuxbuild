@@ -1,4 +1,13 @@
 pkgname=test-pkg
 pkgver=0.1
-pkgurl=
+pkgurls=(https://nixos.org/nix/install)
 depends=(test-pkg1)
+
+buildpkg() {
+	echo hello
+}
+
+installpkg() {
+	cp install $DST
+}
+	
