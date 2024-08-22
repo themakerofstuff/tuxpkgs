@@ -6,7 +6,7 @@ depends=(popt-bootstrap)
 buildpkg() {
 	tar xf rsync-$pkgver.tar.gz
 	cd rsync-$pkgver
-	./configure --prefix=/usr --host=$CC_TGT --disable-xxhash
+	./configure --prefix=/usr --host=$CC_TGT --disable-xxhash --disable-openssl --disable-zstd --disable-lz4
 	make || make -j1
 }
 
