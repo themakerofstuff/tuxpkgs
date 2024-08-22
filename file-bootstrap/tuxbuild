@@ -1,0 +1,28 @@
+pkgname=file-bootstrap
+pkgver=5.45
+pkgurls=(https://astron.com/pub/file/file-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf file-$pkgver.tar.gz
+    cd file-$pkgver
+    mkdir build
+    cd build
+    ../configure --disable-bzlib      \
+               --disable-libseccomp \
+               --disable-xzlib      \
+               --disable-zlib
+    make
+    cd ..
+    ./configure --prefix=/usr --host=$CC_TGT --build=$(./config.guess)
+    make FILE_COMPILE=$(pwd)/build/src/file || make FILE_COMPILE=$(pwd)/build/src/file -j1
+}
+
+installpkg() {
+    cd file-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    rm -v $ROOT/usr/lib/libmagic.la
+}

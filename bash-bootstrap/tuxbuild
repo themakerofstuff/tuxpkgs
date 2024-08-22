@@ -1,0 +1,24 @@
+pkgname=bash-bootstrap
+pkgver=5.2.32
+pkgurls=(https://ftp.gnu.org/gnu/bash/bash-${pkgver}.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf bash-${pkgver}.tar.gz
+    cd bash-$pkgver
+    ./configure --prefix=/usr                      \
+            --build=$(sh support/config.guess) \
+            --host=$CC_TGT                    \
+            --without-bash-malloc              \
+            bash_cv_strtold_broken=no
+    make || make -j1
+}
+
+installpkg() {
+    cd bash-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    ln -s bash $ROOT/bin/sh
+}

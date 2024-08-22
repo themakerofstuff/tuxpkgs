@@ -1,0 +1,16 @@
+pkgname=m4-bootstrap
+pkgver=1.4.19
+pkgurls=(https://ftp.gnu.org/gnu/m4/m4-${pkgver}.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf m4-${pkgver}.tar.xz
+    cd m4-$pkgver
+    ./configure --prefix=/usr --host=$CC_TGT --build=$(build-aux/config.guess)
+    make || make -j1
+}
+
+installpkg() {
+    cd m4-$pkgver
+    make DESTDIR=$DST install
+}

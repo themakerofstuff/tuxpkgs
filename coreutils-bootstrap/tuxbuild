@@ -1,0 +1,27 @@
+pkgname=coreutils-bootstrap
+pkgver=9.5
+pkgurls=(https://ftp.gnu.org/gnu/coreutils/coreutils-${pkgver}.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf coreutils-${pkgver}.tar.xz
+    cd coreutils-$pkgver
+    ./configure --prefix=/usr                     \
+            --host=$CC_TGT                   \
+            --build=$(build-aux/config.guess) \
+            --enable-install-program=hostname \
+            --enable-no-install-program=kill,uptime
+    make || make -j1
+}
+
+installpkg() {
+    cd coreutils-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    mv -v $ROOT/usr/bin/chroot              $ROOT/usr/sbin
+    mkdir -pv $ROOT/usr/share/man/man8
+    mv -v $ROOT/usr/share/man/man1/chroot.1 $ROOT/usr/share/man/man8/chroot.8
+    sed -i 's/"1"/"8"/'                    $ROOT/usr/share/man/man8/chroot.8
+}

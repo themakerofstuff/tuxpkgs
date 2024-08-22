@@ -1,0 +1,39 @@
+pkgname=ncurses-bootstrap
+pkgver=6.5
+pkgurls=(https://invisible-mirror.net/archives/ncurses/ncurses-${pkgver}.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf ncurses-${pkgver}.tar.gz
+    cd ncurses-$pkgver
+    sed -i s/mawk// configure
+    mkdir build
+    cd build
+    ../configure
+    make -C include
+    make -C progs tic
+    cd ..
+    ./configure --prefix=/usr                \
+            --host=$CC_TGT              \
+            --build=$(./config.guess)    \
+            --mandir=/usr/share/man      \
+            --with-manpage-format=normal \
+            --with-shared                \
+            --without-normal             \
+            --with-cxx-shared            \
+            --without-debug              \
+            --without-ada                \
+            --disable-stripping
+    make || make -j1
+}
+
+installpkg() {
+    cd ncurses-$pkgver
+    make DESTDIR=$DST TIC_PATH=$(pwd)/build/progs/tic install
+}
+
+postinstpkg() {
+    ln -sv libncursesw.so $ROOT/usr/lib/libncurses.so
+    sed -e 's/^#if.*XOPEN.*$/#if 1/' \
+        -i $ROOT/usr/include/curses.h
+}

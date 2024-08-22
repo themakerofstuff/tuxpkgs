@@ -1,0 +1,37 @@
+pkgname=glibc-bootstrap
+pkgver=2.40
+pkgurls=(https://ftp.gnu.org/gnu/glibc/glibc-${pkgver}.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/glibc-${pkgver}-fhs-1.patch)
+depends=()
+
+buildpkg() {
+    tar xf glibc-${pkgver}.tar.xz
+    cd glibc-$pkgver
+    case $(uname -m) in
+        i?86)   ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
+        ;;
+        x86_64) ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64
+                ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
+        ;;
+    esac
+    patch -Np1 -i ../glibc-${pkgver}-fhs-1.patch
+    mkdir build
+    cd build
+    ../configure                             \
+        --prefix=/usr                      \
+        --host=$CC_TGT                    \
+        --build=$(../scripts/config.guess) \
+        --enable-kernel=4.19               \
+        --with-headers=$ROOT/usr/include    \
+        --disable-nscd                     \
+        libc_cv_slibdir=/usr/lib
+    make || make -j1
+}
+
+installpkg() {
+    cd glibc-${pkgver}/build
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    sed '/RTLDLIST=/s@/usr@@g' -i $ROOT/usr/bin/ldd
+}

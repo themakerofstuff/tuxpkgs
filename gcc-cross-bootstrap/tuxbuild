@@ -1,11 +1,11 @@
 pkgname=gcc-cross-bootstrap
 pkgver=14.2.0
-pkgurls=(https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.1.tar.xz https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz)
+pkgurls=(https://ftp.gnu.org/gnu/gcc/gcc-${pkgver}/gcc-${pkgver}.tar.xz https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.1.tar.xz https://ftp.gnu.org/gnu/gmp/gmp-6.3.0.tar.xz https://ftp.gnu.org/gnu/mpc/mpc-1.3.1.tar.gz)
 depends=()
 
 buildpkg() {
-	tar fx gcc-14.2.0.tar.xz
-	cd gcc-14.2.0
+	tar fx gcc-{$pkgver}.tar.xz
+	cd gcc-$pkgver
 	tar -xf ../mpfr-4.2.1.tar.xz
 	mv -v mpfr-4.2.1 mpfr
 	tar -xf ../gmp-6.3.0.tar.xz
@@ -15,41 +15,41 @@ buildpkg() {
 	case $(uname -m) in
   		x86_64)
     			sed -e '/m64=/s/lib64/lib/' \
-        		-i.orig gcc/config/i386/t-linux64
- 		;;
+        		-i.orig gcc/config/i386/t-linux64 ;;
 	esac
 	mkdir build
 	cd build
 	../configure                  \
-    --target=$CC_TGT         \
-    --prefix=$ROOT/tools       \
-    --with-glibc-version=2.40 \
-    --with-sysroot=$ROOT       \
-    --with-newlib             \
-    --without-headers         \
-    --enable-default-pie      \
-    --enable-default-ssp      \
-    --disable-nls             \
-    --disable-shared          \
-    --disable-multilib        \
-    --disable-threads         \
-    --disable-libatomic       \
-    --disable-libgomp         \
-    --disable-libquadmath     \
-    --disable-libssp          \
-    --disable-libvtv          \
-    --disable-libstdcxx       \
-    --enable-languages=c,c++
+    	--target=$CC_TGT         \
+    	--prefix=$ROOT/tools       \
+    	--with-glibc-version=2.40 \
+    	--with-sysroot=$ROOT       \
+    	--with-newlib             \
+    	--without-headers         \
+    	--enable-default-pie      \
+    	--enable-default-ssp      \
+    	--disable-nls             \
+    	--disable-shared          \
+    	--disable-multilib        \
+    	--disable-threads         \
+    	--disable-libatomic       \
+    	--disable-libgomp         \
+    	--disable-libquadmath     \
+    	--disable-libssp          \
+    	--disable-libvtv          \
+    	--disable-libstdcxx       \
+    	--enable-languages=c,c++
 	make || make -j1
 }
 
 installpkg() {
-	cd gcc-14.2.0/build
+	cd gcc-${pkgver}/build
 	make DESTDIR=$DST install
 }
 
 postinstpkg() {
-	cd gcc-14.2.0
+	ldconfig
+	cd gcc-$pkgver
 	cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
   		`dirname $($CC_TGT-gcc -print-libgcc-file-name)`/include/limits.h
 }

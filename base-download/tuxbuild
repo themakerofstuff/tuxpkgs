@@ -1,0 +1,12 @@
+pkgname=base-download
+pkgver=1.0
+pkgurls=(https://linuxfromscratch.org/lfs/view/systemd/wget-list-systemd)
+depends=()
+
+buildpkg() {
+    mkdir -p $DST/var/lib/tux/sources
+}
+
+installpkg() {
+    wget --input-file=wget-list-systemd --continue --directory-prefix=$DST/var/lib/tux/sources
+}

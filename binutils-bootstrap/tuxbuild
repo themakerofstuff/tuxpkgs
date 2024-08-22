@@ -1,0 +1,33 @@
+pkgname=binutils-bootstrap
+pkgver=2.43.1
+pkgurls=(https://ftp.gnu.org/gnu/binutils/binutils-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf binutils-$pkgver.tar.xz
+    cd binutils-$pkgver
+    sed '6009s/$add_dir//' -i ltmain.sh
+    mkdir build
+    cd build
+    ../configure                   \
+    --prefix=/usr              \
+    --build=$(../config.guess) \
+    --host=$CC_TGT            \
+    --disable-nls              \
+    --enable-shared            \
+    --enable-gprofng=no        \
+    --disable-werror           \
+    --enable-64-bit-bfd        \
+    --enable-new-dtags         \
+    --enable-default-hash-style=gnu
+    make || make -j1
+}
+
+installpkg() {
+    cd binutils-${pkgver}/build
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    rm -v $ROOT/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes,sframe}.{a,la}
+}

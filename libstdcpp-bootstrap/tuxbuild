@@ -1,0 +1,29 @@
+pkgname=libstdcpp-bootstrap
+pkgver=14.2.0
+pkgurls=(https://ftp.gnu.org/gnu/gcc/gcc-${pkgver}/gcc-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf gcc-$pkgver.tar.xz
+    cd gcc-$pkgver
+    mkdir build
+    cd build
+    ../libstdc++-v3/configure           \
+    --host=$CC_TGT                 \
+    --build=$(../config.guess)      \
+    --prefix=/usr                   \
+    --disable-multilib              \
+    --disable-nls                   \
+    --disable-libstdcxx-pch         \
+    --with-gxx-include-dir=/tools/$CC_TGT/include/c++/$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd gcc-$pkgver/build
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    rm -v $ROOT/usr/lib/lib{stdc++{,exp,fs},supc++}.la
+}

@@ -1,0 +1,18 @@
+pkgname=patch-bootstrap
+pkgver=2.7.6
+pkgurls=(https://ftp.gnu.org/gnu/patch/patch-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf patch-$pkgver.tar.xz
+    cd patch-$pkgver
+    ./configure --prefix=/usr   \
+            --host=$CC_TGT \
+            --build=$(build-aux/config.guess)
+    make || make -j1
+}
+
+installpkg() {
+    cd patch-$pkgver
+    make DESTDIR=$DST install
+}

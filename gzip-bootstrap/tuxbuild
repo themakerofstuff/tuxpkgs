@@ -1,0 +1,16 @@
+pkgname=gzip-bootstrap
+pkgver=1.13
+pkgurls=(https://ftp.gnu.org/gnu/gzip/gzip-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf gzip-$pkgver.tar.xz
+    cd gzip-$pkgver
+    ./configure --prefix=/usr --host=$CC_TGT
+    make || make -j1
+}
+
+installpkg() {
+    cd gzip-$pkgver
+    make DESTDIR=$DST install
+}

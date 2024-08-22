@@ -1,0 +1,18 @@
+pkgname=diffutils-bootstrap
+pkgver=3.10
+pkgurls=(https://ftp.gnu.org/gnu/diffutils/diffutils-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf diffutils-$pkgver.tar.xz
+    cd diffutils-$pkgver
+    ./configure --prefix=/usr   \
+            --host=$CC_TGT \
+            --build=$(./build-aux/config.guess)
+    make || make -j1
+}
+
+installpkg() {
+    cd diffutils-$pkgver
+    make DESTDIR=$DST install
+}

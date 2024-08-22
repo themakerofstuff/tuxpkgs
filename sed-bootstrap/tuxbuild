@@ -1,0 +1,18 @@
+pkgname=sed-bootstrap
+pkgver=4.9
+pkgurls=(https://ftp.gnu.org/gnu/sed/sed-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf sed-$pkgver.tar.xz
+    cd sed-$pkgver
+    ./configure --prefix=/usr   \
+            --host=$CC_TGT \
+            --build=$(./build-aux/config.guess)
+    make || make -j1
+}
+
+installpkg() {
+    cd sed-$pkgver
+    make DESTDIR=$DST install
+}

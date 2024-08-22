@@ -1,0 +1,24 @@
+pkgname=xz
+pkgver=5.6.2
+pkgurls=(https://github.com/tukaani-project/xz/releases/download/v${pkgver}/xz-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf xz-$pkgver.tar.xz
+    cd xz-$pkgver
+    ./configure --prefix=/usr                     \
+            --host=$CC_TGT                   \
+            --build=$(build-aux/config.guess) \
+            --disable-static                  \
+            --docdir=/usr/share/doc/xz-5.6.2
+    make || make -j1
+}
+
+installpkg() {
+    cd xz-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    rm -v $ROOT/usr/lib/liblzma.la
+}

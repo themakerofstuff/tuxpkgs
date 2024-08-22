@@ -1,0 +1,19 @@
+pkgname=make-bootstrap
+pkgver=4.4.1
+pkgurls=(https://ftp.gnu.org/gnu/make/make-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf make-$pkgver.tar.gz
+    cd make-$pkgver
+    ./configure --prefix=/usr   \
+            --without-guile \
+            --host=$CC_TGT \
+            --build=$(build-aux/config.guess)
+    make || make -j1
+}
+
+installpkg() {
+    cd make-$pkgver
+    make DESTDIR=$DST install
+}

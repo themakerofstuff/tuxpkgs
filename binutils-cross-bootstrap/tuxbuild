@@ -1,11 +1,11 @@
 pkgname=binutils-cross-bootstrap
 pkgver=2.43.1
-pkgurls=(https://ftp.gnu.org/gnu/binutils/binutils-2.43.1.tar.xz)
+pkgurls=(https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz)
 depends=()
 
 buildpkg() {
-	tar xf binutils-2.43.1.tar.xz
-	cd binutils-2.43.1
+	tar xf binutils-${pkgver}.tar.xz
+	cd binutils-$pkgver
 	mkdir build
 	cd build
 	../configure --prefix=/tools \
@@ -20,6 +20,6 @@ buildpkg() {
 }
 
 installpkg() {
-	cd binutils-2.43.1/build
-	make DESTDIR=$DST install || make DESTDIR=$DST install -j1
+	cd binutils-${pkgver}/build
+	make DESTDIR=$DST install
 }
