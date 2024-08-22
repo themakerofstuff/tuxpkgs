@@ -1,0 +1,16 @@
+pkgname=popt-bootstrap
+pkgver=1.19
+pkgurls=(https://ftp.rpm.org/popt/releases/popt-1.x/popt-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+	tar xf popt-$pkgver.tar.gz
+	cd popt-$pkgver
+	./configure --prefix=/usr --host=$CC_TGT --disable-static
+	make || make -j1
+}
+
+installpkg() {
+	cd popt-$pkgver
+	make DESTDIR=$DST install
+}

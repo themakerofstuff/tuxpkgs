@@ -1,7 +1,7 @@
 pkgname=base-bootstrap
 pkgver=1.0
 pkgurls=()
-depends=(m4-bootstrap ncurses-bootstrap bash-bootstrap coreutils-bootstrap diffutils-bootstrap file-bootstrap findutils-bootstrap gawk-bootstrap grep-bootstrap gzip-bootstrap make-bootstrap patch-bootstrap sed-bootstrap tar-bootstrap xz-bootstrap binutils-bootstrap gcc-bootstrap base-download)
+depends=(m4-bootstrap ncurses-bootstrap bash-bootstrap coreutils-bootstrap diffutils-bootstrap file-bootstrap findutils-bootstrap gawk-bootstrap grep-bootstrap gzip-bootstrap make-bootstrap patch-bootstrap sed-bootstrap tar-bootstrap xz-bootstrap binutils-bootstrap gcc-bootstrap rsync-bootstrap base-download)
 
 buildpkg() {
     echo -n
