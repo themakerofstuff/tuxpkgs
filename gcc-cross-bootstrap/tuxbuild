@@ -4,7 +4,7 @@ pkgurls=(https://ftp.gnu.org/gnu/gcc/gcc-${pkgver}/gcc-${pkgver}.tar.xz https://
 depends=()
 
 buildpkg() {
-	tar fx gcc-{$pkgver}.tar.xz
+	tar fx gcc-${pkgver}.tar.xz
 	cd gcc-$pkgver
 	tar -xf ../mpfr-4.2.1.tar.xz
 	mv -v mpfr-4.2.1 mpfr
