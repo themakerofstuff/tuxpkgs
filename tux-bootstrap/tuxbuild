@@ -1,0 +1,15 @@
+pkgname=tux-bootstrap
+pkgver=1.0
+pkgurls=(https://github.com/themakerofstuff/tux/releases/${pkgver}/download/tux-$pkgver.tar.xz
+depends=(rsync-bootstrap)
+
+buildpkg() {
+	mkdir tux
+	cd tux
+	tar xf ../tux-$pkgver.tar.xz
+}
+
+installpkg() {
+	cd tux
+	make prefix=/usr root=$DST install
+}
