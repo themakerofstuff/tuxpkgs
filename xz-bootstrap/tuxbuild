@@ -10,7 +10,7 @@ buildpkg() {
             --host=$CC_TGT                   \
             --build=$(build-aux/config.guess) \
             --disable-static                  \
-            --docdir=/usr/share/doc/xz-5.6.2
+            --docdir=/usr/share/doc/xz-$pkgver
     make || make -j1
 }
 
