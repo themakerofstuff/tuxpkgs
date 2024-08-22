@@ -13,5 +13,6 @@ buildpkg() {
 installpkg() {
     cd linux-$pkgver
     find usr/include -type f ! -name '*.h' -delete
-    cp -r usr/include $ROOT/usr
+    mkdir -p $DST/usr
+    cp -r usr/include $DST/usr
 }
