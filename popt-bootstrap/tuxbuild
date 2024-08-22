@@ -1,6 +1,6 @@
 pkgname=popt-bootstrap
 pkgver=1.19
-pkgurls=(https://ftp.rpm.org/popt/releases/popt-1.x/popt-$pkgver.tar.gz)
+pkgurls=(http://ftp.rpm.org/popt/releases/popt-1.x/popt-$pkgver.tar.gz)
 depends=()
 
 buildpkg() {
