@@ -21,7 +21,7 @@ buildpkg() {
 	cd build
 	../configure                  \
     	--target=$CC_TGT         \
-    	--prefix=$ROOT/tools       \
+    	--prefix=/tools       \
     	--with-glibc-version=2.40 \
     	--with-sysroot=$ROOT       \
     	--with-newlib             \
