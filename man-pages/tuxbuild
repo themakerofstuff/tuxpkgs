@@ -1,0 +1,15 @@
+pkgname=man-pages
+pkgver=6.9.1
+pkgurls=(https://www.kernel.org/pub/linux/docs/man-pages/man-pages-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    rm -v man3/crypt*
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make prefix/usr DESTDIR=$DST install
+}

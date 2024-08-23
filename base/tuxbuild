@@ -1,0 +1,12 @@
+pkgname=base
+pkgver=1.0
+pkgurls=()
+depends=(man-pages iana-etc glibc-init zlib bzip2 xz lz4 zstd file readline m4 bc flex tcl expect dejagnu pkgconf binutils gmp mpfr mpc attr acl libcap libxcrypt shadow gcc ncurses sed psmisc gettext bison grep bash libtool gdbm gperf expat inetutils less perl perl-xml-parser intltool autoconf automake openssl kmod libelf libffi python3 python3-flit-core python3-wheel python3-setuptools ninja meson coreutils check diffutils gawk findutils groff grub-bios gzip iproute2 kbd libpipeline make patch tar texinfo vim python3-markupsafe python3-jinja2 systemd dbus man-db procps-ng util-linux e2fsprogs)
+
+buildpkg() {
+    echo -n
+}
+
+installpkg() {
+    echo -n
+}

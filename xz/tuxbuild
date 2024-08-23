@@ -1,0 +1,18 @@
+pkgname=xz
+pkgver=5.6.2
+pkgurls=(https://github.com//tukaani-project/xz/releases/download/v${pkgver}/xz-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/xz-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

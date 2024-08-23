@@ -1,0 +1,16 @@
+pkgname=texinfo
+pkgver=7.1
+pkgurls=(https://ftp.gnu.org/gnu/texinfo/texinfo-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf texinfo-$pkgver.tar.xz
+    cd texinfo-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd texinfo-$pkgver
+    make DESTDIR=$DST install
+}

@@ -1,0 +1,15 @@
+pkgname=lz4
+pkgver=1.10.0
+pkgurls=(https://github.com/lz4/lz4/releases/download/v${pkgver}/lz4-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    mkdir -p $DST/usr
+    make BUILD_STATIC=no PREFIX=$DST/usr
+}
+
+installpkg() {
+    make BUILD_STATIC=no PREFIX=$DST/usr install
+}

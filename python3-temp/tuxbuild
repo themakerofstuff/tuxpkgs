@@ -1,0 +1,19 @@
+pkgname=python3-temp
+pkgver=3.12.5
+pkgurls=(https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf Python-$pkgver.tar.xz
+    cd Python-$pkgver
+    unset CXXFLAGS CFLAGS LDFLAGS CPPFLAGS
+    ./configure --prefix=/usr   \
+            --enable-shared \
+            --without-ensurepip
+    make || make -j1
+}
+
+installpkg() {
+    cd Python-$pkgver
+    make DESTDIR=$DST install
+}

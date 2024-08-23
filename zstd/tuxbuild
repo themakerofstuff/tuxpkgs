@@ -1,0 +1,20 @@
+pkgname=zstd
+pkgver=1.5.6
+pkgurls=(https://github.com/facebook/zstd/releases/download/v${pkgver}/zstd-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    mkdir -p $DST/usr
+    make prefix=$DST/usr
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make prefix=$DST/usr install
+}
+
+postinstpkg() {
+    rm -v $ROOT/usr/lib/libzstd.a
+}

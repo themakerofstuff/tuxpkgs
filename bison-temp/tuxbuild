@@ -1,0 +1,17 @@
+pkgname=bison-temp
+pkgver=3.8.2
+pkgurls=(https://ftp.gnu.org/gnu/bison/bison-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf bison-$pkgver.tar.xz
+    cd bison-$pkgver
+    ./configure --prefix=/usr \
+            --docdir=/usr/share/doc/bison-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd bison-$pkgver
+    make DESTDIR=$DST install
+}

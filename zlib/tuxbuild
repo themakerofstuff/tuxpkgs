@@ -1,0 +1,20 @@
+pkgname=zlib
+pkgver=1.3.1
+pkgurls=(https://zlib.net/fossils/zlib-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    rm -fv $ROOT/usr/lib/libz.a
+}

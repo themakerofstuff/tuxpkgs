@@ -1,0 +1,17 @@
+pkgname=gettext-temp
+pkgver=0.22.5
+pkgurls=(https://ftp.gnu.org/gnu/gettext/gettext-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf gettext-$pkgver.tar.xz
+    cd gettext-$pkgver
+    ./configure --disable-shared
+    make || make -j1
+}
+
+installpkg() {
+    mkdir -p $DST/usr/bin
+    cd gettext-$pkgver
+    cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} $DST/usr/bin
+}

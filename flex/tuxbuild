@@ -1,0 +1,24 @@
+pkgname=flex
+pkgver=2.6.4
+pkgurls=(https://github.com/westes/flex/releases/download/v${pkgver}/flex-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr \
+            --docdir=/usr/share/doc/flex-$pkgver \
+            --disable-static
+    make || make -j1
+}
+
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    ln -sv flex   $ROOT/usr/bin/lex
+    ln -sv flex.1 $ROOT/usr/share/man/man1/lex.1
+}

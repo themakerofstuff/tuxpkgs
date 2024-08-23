@@ -1,0 +1,30 @@
+pkgname=util-linux-temp
+pkgver=2.40.2
+pkgurls=(https://www.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar fx util-linux-$pkgver.tar.xz
+    cd util-linux-$pkgver
+    mkdir -p $DST/var/lib/hwclock
+    ./configure --libdir=/usr/lib     \
+            --runstatedir=/run    \
+            --disable-chfn-chsh   \
+            --disable-login       \
+            --disable-nologin     \
+            --disable-su          \
+            --disable-setpriv     \
+            --disable-runuser     \
+            --disable-pylibmount  \
+            --disable-static      \
+            --disable-liblastlog2 \
+            --without-python      \
+            ADJTIME_PATH=/var/lib/hwclock/adjtime \
+            --docdir=/usr/share/doc/util-linux-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd util-linux-$pkgver
+    make DESTDIR=$DST install
+}

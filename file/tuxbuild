@@ -1,0 +1,16 @@
+pkgname=file
+pkgver=5.45
+pkgurls=(https://astron.com/pub/file/file-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

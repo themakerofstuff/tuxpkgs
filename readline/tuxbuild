@@ -1,0 +1,24 @@
+pkgname=readline
+pkgver=8.2.13
+pkgurls=(https://ftp.gnu.org/gnu/readline/readline-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    sed -i '/MV.*old/d' Makefile.in
+    sed -i '/{OLDSUFF}/c:' support/shlib-install
+    sed -i 's/-Wl,-rpath,[^ ]*//' support/shobj-conf
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --with-curses    \
+            --docdir=/usr/share/doc/readline-$pkgver
+    make SHLIB_LIBS="-lncursesw"
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make SHLIB_LIBS="-lncursesw" DESTDIR=$DST install
+    mkdir -p $DST/usr/share/doc/readline-$pkgver
+    install -v -m644 doc/*.{ps,pdf,html,dvi} $DST/usr/share/doc/readline-$pkgver
+}

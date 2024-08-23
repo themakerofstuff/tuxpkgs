@@ -1,0 +1,12 @@
+pkgname=base-temptools
+pkgver=1.0
+pkgurls=()
+depends=(gettext-temp bison-temp perl-temp python3-temp texinfo-temp util-linux-temp)
+
+buildpkg() {
+    echo -n
+}
+
+installpkg() {
+    echo -n
+}
