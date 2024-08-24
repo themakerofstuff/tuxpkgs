@@ -34,16 +34,15 @@ buildpkg() {
 installpkg() {
     cd tcl${pkgver}/unix
     make DESTDIR=$DST install
+    make DESTDIR=$DST install-private-headers
+    cd ..
+    tar -xf ../tcl${pkgver}-html.tar.gz --strip-components=1
+    mkdir -v -p $DST/usr/share/doc/tcl-$pkgver
+    cp -v -r  ./html/* $DST/usr/share/doc/tcl-$pkgver
+    ln -sfv tclsh8.6 $DST/usr/bin/tclsh
+    mv $DST/usr/share/man/man3/{Thread,Tcl_Thread}.3
 }
 
 postinstpkg() {
-    cd tcl${pkgver}/unix
     chmod -v u+w $ROOT/usr/lib/libtcl8.6.so
-    make install-private-headers
-    ln -sfv tclsh8.6 $ROOT/usr/bin/tclsh
-    mv $ROOT/usr/share/man/man3/{Thread,Tcl_Thread}.3
-    cd ..
-    tar -xf ../tcl${pkgver}-html.tar.gz --strip-components=1
-    mkdir -v -p /usr/share/doc/tcl-$pkgver
-    cp -v -r  ./html/* /usr/share/doc/tcl-$pkgver
 }

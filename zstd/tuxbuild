@@ -13,8 +13,5 @@ buildpkg() {
 installpkg() {
     cd $pkgname-$pkgver
     make prefix=$DST/usr install
-}
-
-postinstpkg() {
-    rm -v $ROOT/usr/lib/libzstd.a
+    rm -v $DST/usr/lib/libzstd.a
 }

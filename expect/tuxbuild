@@ -1,0 +1,24 @@
+pkgname=expect
+pkgver=5.45.4
+pkgurls=(https://prdownloads.sourceforge.net/expect/expect${pkgver}.tar.gz https://www.linuxfromscratch.org/patches/lfs/development/expect-$pkgver-gcc14-1.patch)
+depends=()
+
+buildpkg() {
+    tar xf expect${pkgver}.tar.gz
+    cd expect${pkgver}
+    python3 -c 'from pty import spawn; spawn(["echo", "ok"])' || return 1
+    patch -Np1 -i ../expect-5.45.4-gcc14-1.patch
+    ./configure --prefix=/usr           \
+            --with-tcl=/usr/lib     \
+            --enable-shared         \
+            --disable-rpath         \
+            --mandir=/usr/share/man \
+            --with-tclinclude=/usr/include
+    make || make -j1
+}
+
+installpkg() {
+    cd expect${pkgver}
+    make DESTDIR=$DST install
+    ln -svf expect5.45.4/libexpect5.45.4.so $DST/usr/lib
+}

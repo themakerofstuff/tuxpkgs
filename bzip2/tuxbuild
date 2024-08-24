@@ -1,6 +1,6 @@
 pkgname=bzip2
 pkgver=1.0.8
-pkgurls=(https://www.sourceware.org/pub/bzip2/bzip2-$pkgver.tar.gz https://www.linuxfromscratch.org/patches/lfs/development/bzip2-1.0.8-install_docs-1.patch)
+pkgurls=(https://www.sourceware.org/pub/bzip2/bzip2-$pkgver.tar.gz https://www.linuxfromscratch.org/patches/lfs/development/bzip2-$pkgver-install_docs-1.patch)
 depends=()
 
 buildpkg() {
@@ -24,8 +24,5 @@ installpkg() {
     for i in $DST/usr/bin/{bzcat,bunzip2}; do
         ln -sfv bzip2 $i
     done
-}
-
-postinstpkg() {
-    rm -fv $ROOT/usr/lib/libbz2.a
+    rm -fv $DST/usr/lib/libbz2.a
 }

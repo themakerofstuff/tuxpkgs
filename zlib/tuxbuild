@@ -13,8 +13,5 @@ buildpkg() {
 installpkg() {
     cd $pkgname-$pkgver
     make DESTDIR=$DST install
-}
-
-postinstpkg() {
-    rm -fv $ROOT/usr/lib/libz.a
+    rm -fv $DST/usr/lib/libz.a
 }

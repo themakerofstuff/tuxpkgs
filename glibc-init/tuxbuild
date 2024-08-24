@@ -24,11 +24,41 @@ installpkg() {
     mkdir -p $DST/etc
     touch $DST/etc/ld.so.conf
     sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
-    make DESTDIR=$DST install 
+    make DESTDIR=$DST install
+    mkdir -p $DST/etc
+    sed '/RTLDLIST=/s@/usr@@g' -i $DST/usr/bin/ldd
+    cat > $DST/etc/nsswitch.conf << "EOF"
+# Begin /etc/nsswitch.conf
+
+passwd: files systemd
+group: files systemd
+shadow: files systemd
+
+hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+# End /etc/nsswitch.conf
+EOF
+    cat > $DST/etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+/usr/local/lib
+/opt/lib
+
+EOF
+    cat >> $DST/etc/ld.so.conf << "EOF"
+# Add an include directory
+include /etc/ld.so.conf.d/*.conf
+
+EOF
+    mkdir -pv $DST/etc/ld.so.conf.d
 }
 
 postinstpkg() {
-    sed '/RTLDLIST=/s@/usr@@g' -i $ROOT/usr/bin/ldd
     localedef -i C -f UTF-8 C.UTF-8
     localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
     localedef -i de_DE -f ISO-8859-1 de_DE
@@ -64,23 +94,6 @@ postinstpkg() {
     localedef -i zh_CN -f GB18030 zh_CN.GB18030
     localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
     localedef -i zh_TW -f UTF-8 zh_TW.UTF-8
-    cat > /etc/nsswitch.conf << "EOF"
-# Begin /etc/nsswitch.conf
-
-passwd: files systemd
-group: files systemd
-shadow: files systemd
-
-hosts: mymachines resolve [!UNAVAIL=return] files myhostname dns
-networks: files
-
-protocols: files
-services: files
-ethers: files
-rpc: files
-
-# End /etc/nsswitch.conf
-EOF
     tar -xf ../../tzdata2024a.tar.gz
 
     ZONEINFO=$ROOT/usr/share/zoneinfo
@@ -96,17 +109,5 @@ EOF
     cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
     zic -d $ZONEINFO -p America/New_York
     unset ZONEINFO
-    cat > $ROOT/etc/ld.so.conf << "EOF"
-# Begin /etc/ld.so.conf
-/usr/local/lib
-/opt/lib
-
-EOF
-    cat >> $ROOT/etc/ld.so.conf << "EOF"
-# Add an include directory
-include /etc/ld.so.conf.d/*.conf
-
-EOF
-    mkdir -pv $ROOT/etc/ld.so.conf.d
     mv $ROOT/etc/tux/installed/glibc-init $ROOT/etc/tux/installed/glibc
 }
