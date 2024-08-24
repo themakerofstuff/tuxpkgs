@@ -1,0 +1,16 @@
+pkgname=psmisc
+pkgver=23.7
+pkgurls=(https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

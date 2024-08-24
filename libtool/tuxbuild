@@ -1,0 +1,17 @@
+pkgname=libtool
+pkgver=2.4.7
+pkgurls=(https://ftp.gnu.org/gnu/libtool/libtool-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    rm -fv $DST/usr/lib/libltdl.a
+}

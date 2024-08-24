@@ -1,0 +1,17 @@
+pkgname=grep
+pkgver=3.11
+pkgurls=(https://ftp.gnu.org/gnu/grep/grep-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -i "s/echo/#echo/" src/egrep.sh
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

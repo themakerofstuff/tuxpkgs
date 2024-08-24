@@ -1,0 +1,29 @@
+pkgname=binutils
+pkgver=2.43.1
+pkgurls=(https://sourceware.org/pub/binutils/releases/binutils-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    mkdir build
+    cd build
+    ../configure --prefix=/usr       \
+             --sysconfdir=/etc   \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+             --enable-64-bit-bfd \
+             --enable-new-dtags  \
+             --with-system-zlib  \
+             --enable-default-hash-style=gnu
+    make tooldir=/usr || make tooldir=/usr -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    make DESTDIR=$DST tooldir=/usr install
+    rm -fv $DST/usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
+}

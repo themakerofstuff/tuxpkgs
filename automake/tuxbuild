@@ -1,0 +1,16 @@
+pkgname=automake
+pkgver=1.17
+pkgurls=(https://ftp.gnu.org/gnu/automake/automake-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --docdir=/usr/share/doc/automake-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

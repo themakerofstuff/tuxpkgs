@@ -1,0 +1,20 @@
+pkgname=expat
+pkgver=2.6.2
+pkgurls=(https://prdownloads.sourceforge.net/expat/expat-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/expat-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    mkdir -p $DST/usr/share/doc/expat-$pkgver
+    install -v -m644 doc/*.{html,css} $DST/usr/share/doc/expat-$pkgver
+}

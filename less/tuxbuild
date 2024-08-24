@@ -1,0 +1,16 @@
+pkgname=less
+pkgver=661
+pkgurls=(https://www.greenwoodsoftware.com/less/less-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --sysconfdir=/etc
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

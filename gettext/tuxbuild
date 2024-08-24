@@ -1,0 +1,19 @@
+pkgname=gettext
+pkgver=0.22.5
+pkgurls=(https://ftp.gnu.org/gnu/gettext/gettext-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/gettext-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    chmod -v 0755 $DST/usr/lib/preloadable_libintl.so
+}

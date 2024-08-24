@@ -1,0 +1,16 @@
+pkgname=sed
+pkgver=4.9
+pkgurls=(https://ftp.gnu.org/gnu/sed/sed-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

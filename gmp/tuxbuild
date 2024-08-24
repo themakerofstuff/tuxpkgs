@@ -1,0 +1,21 @@
+pkgname=gmp
+pkgver=6.3.0
+pkgurls=(https://ftp.gnu.org/gnu/gmp/gmp-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr    \
+            --enable-cxx     \
+            --disable-static \
+            --docdir=/usr/share/doc/gmp-$pkgver
+    make || make -j1
+    make html
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    make DESTDIR=$DST install-html
+}

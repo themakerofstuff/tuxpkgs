@@ -1,0 +1,20 @@
+pkgname=pkgconf
+pkgver=2.3.0
+pkgurls=(https://distfiles.ariadne.space/pkgconf/pkgconf-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr              \
+            --disable-static           \
+            --docdir=/usr/share/doc/pkgconf-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    ln -sv pkgconf   $DST/usr/bin/pkg-config
+    ln -sv pkgconf.1 $DST/usr/share/man/man1/pkg-config.1
+}

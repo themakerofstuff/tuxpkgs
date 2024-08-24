@@ -1,0 +1,23 @@
+pkgname=openssl
+pkgver=3.3.1
+pkgurls=(https://www.openssl.org/source/openssl-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./config --prefix=/usr         \
+         --openssldir=/etc/ssl \
+         --libdir=lib          \
+         shared                \
+         zlib-dynamic
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+    make DESTDIR=$DST MANSUFFIX=ssl install
+    mv -v $DST/usr/share/doc/openssl $DST/usr/share/doc/openssl-$pkgver
+    cp -vfr doc/* $DST/usr/share/doc/openssl-$pkgver
+}

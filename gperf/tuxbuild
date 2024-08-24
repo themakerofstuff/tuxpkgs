@@ -1,0 +1,16 @@
+pkgname=gperf
+pkgver=3.1
+pkgurls=(https://ftp.gnu.org/gnu/gperf/gperf-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --docdir=/usr/share/doc/gperf-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

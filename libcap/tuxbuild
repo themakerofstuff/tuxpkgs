@@ -1,0 +1,16 @@
+pkgname=libcap
+pkgver=2.70
+pkgurls=(https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -i '/install -m.*STA/d' libcap/Makefile
+    make prefix=/usr lib=lib
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make prefix=$DST/usr lib=lib install
+}

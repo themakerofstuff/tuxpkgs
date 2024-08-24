@@ -1,0 +1,21 @@
+pkgname=dejagnu
+pkgver=1.6.3
+pkgurls=(https://ftp.gnu.org/gnu/dejagnu/dejagnu-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    mkdir build
+    cd build
+    ../configure --prefix=/usr
+    makeinfo --html --no-split -o doc/dejagnu.html ../doc/dejagnu.texi
+    makeinfo --plaintext       -o doc/dejagnu.txt  ../doc/dejagnu.texi
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    make DESTDIR=$DST install
+    install -v -dm755  $DST/usr/share/doc/dejagnu-1.6.3
+    install -v -m644   doc/dejagnu.{html,txt} $DST/usr/share/doc/dejagnu-1.6.3
+}

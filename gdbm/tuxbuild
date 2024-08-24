@@ -1,0 +1,18 @@
+pkgname=gdbm
+pkgver=1.24
+pkgurls=(https://ftp.gnu.org/gnu/gdbm/gdbm-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --enable-libgdbm-compat
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

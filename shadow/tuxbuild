@@ -1,0 +1,40 @@
+pkgname=shadow
+pkgver=4.16.0
+pkgurls=(https://github.com/shadow-maint/shadow/releases/download/$pkgver/shadow-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -i 's/groups$(EXEEXT) //' src/Makefile.in
+    find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
+    find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
+    find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
+    sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD YESCRYPT:' \
+    -e 's:/var/spool/mail:/var/mail:'                   \
+    -e '/PATH=/{s@/sbin:@@;s@/bin:@@}'                  \
+    -i etc/login.defs
+    mkdir -p $DST/usr/bin $ROOT/usr/bin
+    touch $DST/usr/bin/passwd
+    touch $ROOT/usr/bin/passwd
+    ./configure --sysconfdir=/etc   \
+            --disable-static    \
+            --with-{b,yes}crypt \
+            --without-libbsd    \
+            --with-group-name-max-length=32
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make exec_prefix=/usr DESTDIR=$DST install
+    make -C man DESTDIR=$DST install-man
+}
+
+postinstpkg() {
+    pwconv
+    grpconv
+    mkdir -p $ROOT/etc/default
+    useradd -D --gid 999
+    sed -i '/MAIL/s/yes/no/' $ROOT/etc/default/useradd
+}

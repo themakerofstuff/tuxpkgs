@@ -1,0 +1,21 @@
+pkgname=mpfr
+pkgver=4.2.1
+pkgurls=(https://ftp.gnu.org/gnu/mpfr/mpfr-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr        \
+            --disable-static     \
+            --enable-thread-safe \
+            --docdir=/usr/share/doc/mpfr-$pkgver
+    make || make -j1
+    make html
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    make DESTDIR=$DST install-html
+}
