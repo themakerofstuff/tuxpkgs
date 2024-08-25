@@ -100,3 +100,7 @@ EOF
 MaxUse=5G
 EOF
 }
+
+copypkgfiles() {
+    echo -n
+}

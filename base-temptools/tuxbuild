@@ -10,3 +10,7 @@ buildpkg() {
 installpkg() {
     echo -n
 }
+
+copypkgfiles() {
+    echo -n
+}
