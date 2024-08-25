@@ -68,10 +68,8 @@ https://ftp.gnu.org/gnu/readline/readline-8.2.13.tar.gz
 https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz
 https://pypi.org/packages/source/s/setuptools/setuptools-72.2.0.tar.gz
 https://github.com/shadow-maint/shadow/releases/download/4.16.0/shadow-4.16.0.tar.xz
-https://github.com/troglobit/sysklogd/releases/download/v2.6.1/sysklogd-2.6.1.tar.gz
 https://github.com/systemd/systemd/archive/v256.4/systemd-256.4.tar.gz
 https://anduin.linuxfromscratch.org/LFS/systemd-man-pages-256.4.tar.xz
-https://github.com/slicer69/sysvinit/releases/download/3.10/sysvinit-3.10.tar.xz
 https://ftp.gnu.org/gnu/tar/tar-1.35.tar.xz
 https://downloads.sourceforge.net/tcl/tcl8.6.14-src.tar.gz
 https://downloads.sourceforge.net/tcl/tcl8.6.14-html.tar.gz
@@ -90,4 +88,3 @@ https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.5-i18n-2.pa
 https://www.linuxfromscratch.org/patches/lfs/development/expect-5.45.4-gcc14-1.patch
 https://www.linuxfromscratch.org/patches/lfs/development/glibc-2.40-fhs-1.patch
 https://www.linuxfromscratch.org/patches/lfs/development/kbd-2.6.4-backspace-1.patch
-https://www.linuxfromscratch.org/patches/lfs/development/sysvinit-3.10-consolidated-1.patch
