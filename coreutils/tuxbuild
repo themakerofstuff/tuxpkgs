@@ -1,0 +1,23 @@
+pkgname=coreutils
+pkgver=9.5
+pkgurls=(https://ftp.gnu.org/gnu/coreutils/coreutils-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/coreutils-$pkgver-i18n-2.patch)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    patch -Np1 -i ../coreutils-$pkgver-i18n-2.patch
+    autoreconf -fiv
+    FORCE_UNSAFE_CONFIGURE=1 ./configure \
+            --prefix=/usr            \
+            --enable-no-install-program=kill,uptime
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    mv -v $DST/usr/bin/chroot $DST/usr/sbin
+    mv -v $DST/usr/share/man/man1/chroot.1 $DST/usr/share/man/man8/chroot.8
+    sed -i 's/"1"/"8"/' $DST/usr/share/man/man8/chroot.8
+}

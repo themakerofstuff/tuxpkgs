@@ -1,0 +1,16 @@
+pkgname=libpipeline
+pkgver=1.5.7
+pkgurls=(https://download.savannah.gnu.org/releases/libpipeline/libpipeline-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

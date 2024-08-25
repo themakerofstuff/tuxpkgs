@@ -1,0 +1,21 @@
+pkgname=libelf
+pkgver=0.191
+pkgurls=(https://sourceware.org/ftp/elfutils/$pkgver/elfutils-$pkgver.tar.bz2)
+depends=()
+
+buildpkg() {
+    tar xf elfutils-$pkgver.tar.bz2
+    cd elfutils-$pkgver
+    ./configure --prefix=/usr                \
+            --disable-debuginfod         \
+            --enable-libdebuginfod=dummy
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make -C libelf DESTDIR=$DST install
+    mkdir -p $DST/usr/lib/pkgconfig
+    install -vm644 config/libelf.pc $DST/usr/lib/pkgconfig
+    rm -v $DST/usr/lib/libelf.a
+}

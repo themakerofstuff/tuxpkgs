@@ -1,0 +1,15 @@
+pkgname=python3-wheel
+pkgver=0.44.0
+pkgurls=(https://pypi.org/packages/source/w/wheel/wheel-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf wheel-$pkgver.tar.gz
+    cd wheel-$pkgver
+    pip3 wheel -w dist --no-cache-dir --no-build-isolation --no-deps $PWD
+}
+
+installpkg() {
+    cd wheel-$pkgver
+    pip3 install --no-index --root $DST --find-links=dist wheel
+}

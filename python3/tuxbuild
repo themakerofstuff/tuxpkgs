@@ -1,0 +1,26 @@
+pkgname=python3
+pkgver=3.12.5
+pkgurls=(https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf Python-$pkgver.tar.xz
+    cd Python-$pkgver
+    unset CFLAGS CXXFLAGS LDFLAGS CPPFLAGS
+    ./configure --prefix=/usr        \
+            --enable-shared      \
+            --with-system-expat  \
+            --enable-optimizations
+    make || make -j1
+}
+
+installpkg() {
+    cd Python-$pkgver
+    make DESTDIR=$DST install
+    mkdir -p $DST/etc
+    cat > $DST/etc/pip.conf << EOF
+[global]
+root-user-action = ignore
+disable-pip-version-check = true
+EOF
+}

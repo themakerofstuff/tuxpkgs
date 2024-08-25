@@ -1,0 +1,17 @@
+pkgname=tar
+pkgver=1.35
+pkgurls=(https://ftp.gnu.org/gnu/tar/tar-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    FORCE_UNSAFE_CONFIGURE=1  \
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

@@ -1,0 +1,16 @@
+pkgname=groff
+pkgver=1.23.0
+pkgurls=(https://ftp.gnu.org/gnu/groff/groff-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    PAGE=A4 ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

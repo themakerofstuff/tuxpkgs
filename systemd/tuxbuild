@@ -1,0 +1,47 @@
+pkgname=systemd
+pkgver=256.4
+pkgurls=(https://github.com/systemd/systemd/archive/v${pkgver}/systemd-$pkgver.tar.gz https://anduin.linuxfromscratch.org/LFS/systemd-man-pages-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    sed -i -e 's/GROUP="render"/GROUP="video"/' \
+       -e 's/GROUP="sgx", //' rules.d/50-udev-default.rules.in
+    mkdir -p build
+    cd       build
+    meson setup ..                \
+      --prefix=/usr           \
+      --buildtype=release     \
+      -D default-dnssec=no    \
+      -D firstboot=false      \
+      -D install-tests=false  \
+      -D ldconfig=false       \
+      -D sysusers=false       \
+      -D rpmmacrosdir=no      \
+      -D homed=disabled       \
+      -D userdb=false         \
+      -D man=disabled         \
+      -D mode=release         \
+      -D pamconfdir=no        \
+      -D dev-kvm-mode=0660    \
+      -D nobody-group=nogroup \
+      -D sysupdate=disabled   \
+      -D ukify=disabled       \
+      -D docdir=/usr/share/doc/systemd-$pkgver
+      ninja
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    ninja DESTDIR=$DST install
+    mkdir -p $DST/usr/share/man
+    tar -xf ../../systemd-man-pages-$pkgver.tar.xz \
+    --no-same-owner --strip-components=1   \
+    -C $DST/usr/share/man
+}
+
+postinstpkg() {
+    systemd-machine-id-setup
+    systemctl preset-all
+}

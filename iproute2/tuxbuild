@@ -1,0 +1,17 @@
+pkgname=iproute2
+pkgver=6.10.0
+pkgurls=(https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -i /ARPD/d Makefile
+    rm -fv man/man8/arpd.8
+    make NETNS_RUN_DIR=/run/netns 
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST SBINDIR=/usr/sbin install
+}

@@ -1,0 +1,16 @@
+pkgname=patch
+pkgver=2.7.6
+pkgurls=(https://ftp.gnu.org/gnu/patch/patch-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

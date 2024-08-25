@@ -27,6 +27,7 @@ installpkg() {
     make DESTDIR=$DST install
     mkdir -p $DST/etc
     sed '/RTLDLIST=/s@/usr@@g' -i $DST/usr/bin/ldd
+    mkdir -p $DST/etc
     cat > $DST/etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
 
@@ -59,6 +60,7 @@ EOF
 }
 
 postinstpkg() {
+    cd glibc-$pkgver/build
     localedef -i C -f UTF-8 C.UTF-8
     localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
     localedef -i de_DE -f ISO-8859-1 de_DE

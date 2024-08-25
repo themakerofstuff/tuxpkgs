@@ -1,0 +1,19 @@
+pkgname=gawk
+pkgver=5.3.0
+pkgurls=(https://ftp.gnu.org/gnu/gawk/gawk-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -i 's/extras//' Makefile.in
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    rm -fv $ROOT/usr/bin/gawk-5.3.0
+    make DESTDIR=$DST install
+    ln -sv gawk.1 $DST/usr/share/man/man1/awk.1
+}

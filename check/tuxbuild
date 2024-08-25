@@ -1,0 +1,16 @@
+pkgname=check
+pkgver=0.15.2
+pkgurls=(https://github.com/libcheck/check/releases/download/$pkgver/check-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make docdir=/usr/share/doc/check-$pkgver DESTDIR=$DST install
+}

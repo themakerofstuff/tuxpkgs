@@ -1,0 +1,16 @@
+pkgname=gzip
+pkgver=1.13
+pkgurls=(https://ftp.gnu.org/gnu/gzip/gzip-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

@@ -1,0 +1,29 @@
+pkgname=dbus
+pkgver=1.14.10
+pkgurls=(https://dbus.freedesktop.org/releases/dbus/dbus-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr                        \
+            --sysconfdir=/etc                    \
+            --localstatedir=/var                 \
+            --runstatedir=/run                   \
+            --enable-user-session                \
+            --disable-static                     \
+            --disable-doxygen-docs               \
+            --disable-xml-docs                   \
+            --docdir=/usr/share/doc/dbus-$pkgver \
+            --with-system-socket=/run/dbus/system_bus_socket
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    ln -sfv $ROOT/etc/machine-id $ROOT/var/lib/dbus
+}

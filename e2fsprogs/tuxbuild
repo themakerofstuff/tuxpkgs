@@ -1,0 +1,30 @@
+pkgname=e2fsprogs
+pkgver=1.47.1
+pkgurls=(https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v${pkgver}/e2fsprogs-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    mkdir build
+    cd build
+    ../configure --prefix=/usr           \
+             --sysconfdir=/etc       \
+             --enable-elf-shlibs     \
+             --disable-libblkid      \
+             --disable-libuuid       \
+             --disable-uuidd         \
+             --disable-fsck
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    rm -fv $DST/usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+}
+
+postinstpkg() {
+    gunzip -v $ROOT/usr/share/info/libext2fs.info.gz
+    install-info --dir-file=$ROOT/usr/share/info/dir $ROOT/usr/share/info/libext2fs.info
+}

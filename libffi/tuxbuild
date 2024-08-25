@@ -1,0 +1,18 @@
+pkgname=libffi
+pkgver=3.4.6
+pkgurls=(https://github.com/libffi/libffi/releases/download/v${pkgver}/libffi-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr          \
+            --disable-static       \
+            --with-gcc-arch=native
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}
