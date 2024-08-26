@@ -1,0 +1,25 @@
+pkgname=pcre2
+pkgver=10.44
+pkgurls=(https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$pkgver/pcre2-$pkgver.tar.bz2)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.bz2
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr                       \
+            --docdir=/usr/share/doc/pcre2-$pkgver \
+            --enable-unicode                    \
+            --enable-jit                        \
+            --enable-pcre2-16                   \
+            --enable-pcre2-32                   \
+            --enable-pcre2grep-libz             \
+            --enable-pcre2grep-libbz2           \
+            --enable-pcre2test-libreadline      \
+            --disable-static     
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

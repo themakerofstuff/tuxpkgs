@@ -1,0 +1,18 @@
+pkgname=wget
+pkgver=1.24.5
+pkgurls=(https://ftp.gnu.org/gnu/wget/wget-$pkgver.tar.gz)
+depends=(libidn2 libpsl make-ca gnutls pcre2)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr      \
+            --sysconfdir=/etc  \
+            --with-ssl=openssl
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

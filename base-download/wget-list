@@ -44,7 +44,6 @@ https://github.com/libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz
 https://download.savannah.gnu.org/releases/libpipeline/libpipeline-1.5.7.tar.gz
 https://ftp.gnu.org/gnu/libtool/libtool-2.4.7.tar.xz
 https://github.com/besser82/libxcrypt/releases/download/v4.4.36/libxcrypt-4.4.36.tar.xz
-https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.10.5.tar.xz
 https://github.com/lz4/lz4/releases/download/v1.10.0/lz4-1.10.0.tar.gz
 https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz
 https://ftp.gnu.org/gnu/make/make-4.4.1.tar.gz
@@ -87,3 +86,15 @@ https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.5-i18n-2.pa
 https://www.linuxfromscratch.org/patches/lfs/development/expect-5.45.4-gcc14-1.patch
 https://www.linuxfromscratch.org/patches/lfs/development/glibc-2.40-fhs-1.patch
 https://www.linuxfromscratch.org/patches/lfs/development/kbd-2.6.4-backspace-1.patch
+https://ftp.gnu.org/gnu/wget/wget-1.24.5.tar.gz
+http://ftp.rpm.org/popt/releases/popt-1.x/popt-1.19.tar.gz
+https://www.samba.org/ftp/rsync/src/rsync-3.3.0.tar.gz
+https://github.com/rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz
+https://ftp.gnu.org/gnu/libidn/libidn2-2.3.7.tar.gz
+https://ftp.gnu.org/gnu/libunistring/libunistring-1.2.tar.xz
+https://github.com/lfs-book/make-ca/archive/v1.14/make-ca-1.14.tar.gz
+https://github.com/p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz
+https://ftp.gnu.org/gnu/libtasn1/libtasn1-4.19.0.tar.gz
+https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.7.1.tar.xz
+https://ftp.gnu.org/gnu/nettle/nettle-3.10.tar.gz
+https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.44/pcre2-10.44.tar.bz2

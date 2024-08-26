@@ -1,0 +1,18 @@
+pkgname=libpsl
+pkgver=0.21.5
+pkgurls=(https://github.com/rockdaboot/libpsl/releases/download/$pkgver/libpsl-$pkgver.tar.gz)
+depends=(libunistring libidn2)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    mkdir build
+    cd build
+    meson setup --prefix=/usr --buildtype=release
+    ninja
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    ninja DESTDIR=$DST install
+}

@@ -1,0 +1,20 @@
+pkgname=make-ca
+pkgver=1.14
+pkgurls=(https://github.com/lfs-book/make-ca/archive/v${pkgver}/make-ca-$pkgver.tar.gz)
+depends=(p11-kit)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    mkdir -p $DST/etc/ssl
+    install -vdm755 $DST/etc/ssl/local
+}
+
+postinstpkg() {
+    $ROOT/usr/sbin/make-ca -g
+    systemctl enable update-pki.timer
+}

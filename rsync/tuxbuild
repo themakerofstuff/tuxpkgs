@@ -1,0 +1,21 @@
+pkgname=rsync
+pkgver=3.3.0
+pkgurls=(https://www.samba.org/ftp/rsync/src/rsync-$pkgver.tar.gz)
+depends=(popt)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    groupadd -g 48 rsyncd &&
+    useradd -c "rsyncd Daemon" -m -d /home/rsync -g rsyncd \
+        -s /bin/false -u 48 rsyncd
+    ./configure --prefix=/usr    \
+            --disable-xxhash \
+            --without-included-zlib
+    make
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

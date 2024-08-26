@@ -1,0 +1,33 @@
+pkgname=p11-kit
+pkgver=0.25.5
+pkgurls=(https://github.com/p11-glue/p11-kit/releases/download/$pkgver/p11-kit-$pkgver.tar.xz)
+depends=(libtasn1)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed '20,$ d' -i trust/trust-extract-compat
+
+    cat >> trust/trust-extract-compat << "EOF"
+# Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Update trust stores
+/usr/sbin/make-ca -r
+EOF
+    mkdir p11-bld
+    cd p11-bld
+    meson setup ..            \
+      --prefix=/usr       \
+      --buildtype=release \
+      -D trust_paths=/etc/pki/anchors
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/p11-bld
+    ninja DESTDIR=$DST install
+    mkdir -p $DST/usr/bin
+    ln -sfv $DST/usr/libexec/p11-kit/trust-extract-compat \
+        $DST/usr/bin/update-ca-certificates
+    ln -sfv ./pkcs11/p11-kit-trust.so $DST/usr/lib/libnssckbi.so
+}

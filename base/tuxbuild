@@ -1,25 +1,27 @@
 pkgname=base
 pkgver=1.0
 pkgurls=()
-depends=(man-pages iana-etc glibc-init zlib bzip2 xz lz4 zstd file readline m4 bc flex tcl expect dejagnu pkgconf binutils gmp mpfr mpc attr acl libcap libxcrypt shadow gcc ncurses sed psmisc gettext bison grep bash libtool gdbm gperf expat inetutils less perl perl-xml-parser intltool autoconf automake openssl kmod libelf libffi python3 python3-flit-core python3-wheel python3-setuptools ninja meson coreutils check diffutils gawk findutils groff gzip iproute2 kbd libpipeline make patch tar texinfo vim python3-markupsafe python3-jinja2 systemd dbus man-db procps-ng util-linux e2fsprogs)
+depends=(man-pages iana-etc glibc-init zlib bzip2 xz lz4 zstd file readline m4 bc flex tcl expect dejagnu pkgconf binutils gmp mpfr mpc attr acl libcap libxcrypt shadow gcc ncurses sed psmisc gettext bison grep bash libtool gdbm gperf expat inetutils less perl perl-xml-parser intltool autoconf automake openssl kmod libelf libffi python3 python3-flit-core python3-wheel python3-setuptools ninja meson coreutils check diffutils gawk findutils groff gzip iproute2 kbd libpipeline make patch tar texinfo vim python3-markupsafe python3-jinja2 systemd dbus man-db procps-ng util-linux e2fsprogs rsync wget git)
 
 buildpkg() {
     echo -n
 }
 
 installpkg() {
-    echo tuxpc > $ROOT/etc/hostname
-    cat > $ROOT/etc/adjtime << "EOF"
-0.0 0 0.0
-0
-LOCAL
+    cat > $ROOT/etc/lsb-release << "EOF"
+DISTRIB_ID="TuxOS"
+DISTRIB_RELEASE="r12.1-138"
+DISTRIB_CODENAME=""
+DISTRIB_DESCRIPTION="TuxOS"
 EOF
-    cat > $ROOT/etc/vconsole.conf << "EOF"
-KEYMAP=uk
-EOF
-    cat > $ROOT/etc/locale.conf << "EOF"
-LANG=en_GB.UTF-8
-EOF
+  cat > /etc/os-release << "EOF"
+NAME="TuxOS"
+VERSION="r12.1-138"
+ID=tuxos
+PRETTY_NAME="TuxOS r12.1-138"
+VERSION_CODENAME=""
+HOME_URL=""
+EOF  
     cat > $ROOT/etc/profile << "EOF"
 # Begin /etc/profile
 

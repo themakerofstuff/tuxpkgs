@@ -1,0 +1,18 @@
+pkgname=libunistring
+pkgver=1.2
+pkgurls=(https://ftp.gnu.org/gnu/libunistring/libunistring-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/libunistring-$pkgver
+    make
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

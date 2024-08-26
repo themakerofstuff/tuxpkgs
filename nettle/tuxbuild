@@ -1,0 +1,17 @@
+pkgname=nettle
+pkgver=3.10
+pkgurls=(https://ftp.gnu.org/gnu/nettle/nettle-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+    chmod   -v   755 $DST/usr/lib/lib{hogweed,nettle}.so
+}

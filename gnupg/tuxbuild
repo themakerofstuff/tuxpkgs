@@ -1,0 +1,21 @@
+pkgname=gnupg
+pkgver=2.4.5
+pkgurls=(https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-$pkgver.tar.bz2)
+depends=(libassuan libgcrypt libksba npth openldap gnutls pinentry)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.bz2
+    cd $pkgname-$pkgver
+    mkdir build
+    cd build
+    ../configure --prefix=/usr           \
+             --localstatedir=/var    \
+             --sysconfdir=/etc       \
+             --docdir=/usr/share/doc/gnupg-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    make DESTDIR=$DST install
+}

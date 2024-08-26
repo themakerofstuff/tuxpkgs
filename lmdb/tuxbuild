@@ -1,0 +1,16 @@
+pkgname=lmdb
+pkgver=0.9.31
+pkgurls=(https://github.com/LMDB/lmdb/archive/LMDB_$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf LMDB_$pkgver.tar.gz
+    cd lmdb-LMDB_$pkgver/libraries/liblmdb
+    make || make -j1
+    sed -i 's| liblmdb.a||' Makefile
+}
+
+installpkg() {
+    cd lmdb-LMDB_$pkgver/libraries/liblmdb
+    make prefix=/usr DESTDIR=$DST install
+}

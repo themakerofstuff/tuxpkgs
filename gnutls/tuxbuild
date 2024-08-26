@@ -1,0 +1,18 @@
+pkgname=gnutls
+pkgver=3.8.7.1
+pkgurls=(https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-$pkgver.tar.xz)
+depends=(nettle make-ca libunistring libtasn1 p11-kit)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr \
+            --docdir=/usr/share/doc/gnutls-$pkgver \
+            --with-default-trust-store-pkcs11="pkcs11:"
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

@@ -1,0 +1,16 @@
+pkgname=popt
+pkgver=1.19
+pkgurls=(http://ftp.rpm.org/popt/releases/popt-1.x/popt-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

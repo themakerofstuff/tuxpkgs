@@ -1,0 +1,16 @@
+pkgname=libidn2
+pkgver=2.3.7
+pkgurls=(https://ftp.gnu.org/gnu/libidn/libidn2-$pkgver.tar.gz)
+depends=(libunistring)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

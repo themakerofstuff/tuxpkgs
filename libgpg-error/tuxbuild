@@ -1,0 +1,16 @@
+pkgname=libgpg-error
+pkgver=1.50
+pkgurls=(https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$pkgver.tar.bz2)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.bz2
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

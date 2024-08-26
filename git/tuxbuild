@@ -1,0 +1,18 @@
+pkgname=git
+pkgver=2.46.0
+pkgurls=(https://www.kernel.org/pub/software/scm/git/git-$pkgver.tar.xz)
+depends=(curl pcre2 gnupg)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr \
+            --with-gitconfig=/etc/gitconfig \
+            --with-python=python3 --with-libpcre2
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make perllibdir=/usr/lib/perl5/5.40/site_perl DESTDIR=$DST install
+}

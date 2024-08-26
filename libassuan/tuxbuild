@@ -1,0 +1,16 @@
+pkgname=libassuan
+pkgver=3.0.1
+pkgurls=(https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-$pkgver.tar.bz2)
+depends=(libgpg-error)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.bz2
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

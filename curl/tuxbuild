@@ -1,0 +1,20 @@
+pkgname=curl
+pkgver=8.9.1
+pkgurls=(https://curl.se/download/curl-$pkgver.tar.xz)
+depends=(libpsl make-ca libidn2)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr                           \
+            --disable-static                        \
+            --with-openssl                          \
+            --enable-threaded-resolver              \
+            --with-ca-path=/etc/ssl/certs
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}
