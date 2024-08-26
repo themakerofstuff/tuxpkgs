@@ -11,5 +11,5 @@ buildpkg() {
 
 installpkg() {
     cd $pkgname-$pkgver
-    make prefix/usr DESTDIR=$DST install
+    make prefix=/usr DESTDIR=$DST install
 }
