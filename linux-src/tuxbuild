@@ -1,0 +1,18 @@
+pkgname=linux-src
+pkgver=6.10.6
+pkgurls=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    echo -n
+}
+
+installpkg() {
+    mkdir -p $DST/usr/src/linux-$pkgver
+    tar xf linux-$pkgver.tar.xz -C $DSR/usr/src/linux-$pkgver
+}
+
+postinstpkg() {
+    rm -rf $ROOT/usr/src/linux
+    ln -sf $ROOT/usr/src/linux-$pkgver $ROOT/usr/src/linux
+}

@@ -5,7 +5,7 @@ depends=(nettle make-ca libunistring libtasn1 p11-kit)
 
 buildpkg() {
     tar xf $pkgname-$pkgver.tar.xz
-    cd $pkgname-$pkgver
+    cd $pkgname-3.8.7
     ./configure --prefix=/usr \
             --docdir=/usr/share/doc/gnutls-$pkgver \
             --with-default-trust-store-pkcs11="pkcs11:"
@@ -13,6 +13,6 @@ buildpkg() {
 }
 
 installpkg() {
-    cd $pkgname-$pkgver
+    cd $pkgname-3.8.7
     make DESTDIR=$DST install
 }
