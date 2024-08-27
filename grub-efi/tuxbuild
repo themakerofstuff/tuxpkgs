@@ -1,4 +1,43 @@
 pkgname=grub-efi
 pkgver=2.12
-pkgurls=(https://ftp.gnu.org/gnu/grub/grub-$pkgver.tar.xz https://unifoundry.com/pub/unifont/unifont-15.1.05/font-builds/unifont-15.1.05.pcf.gz)
+pkgurls=(https://ftp.gnu.org/gnu/grub/grub-$pkgver.tar.xz https://unifoundry.com/pub/unifont/unifont-15.1.05/font-builds/unifont-15.1.05.pcf.gz https://ftp.gnu.org/gnu/gcc/gcc-14.2.0/gcc-14.2.0.tar.xz)
 depends=(efibootmgr freetype-circular)
+
+buildpkg() {
+    tar xf grub-$pkgver.tar.xz
+    cd grub-$pkgver
+    mkdir -pv $DST/usr/share/fonts/unifont
+    gunzip -c ../unifont-15.1.05.pcf.gz > /usr/share/fonts/unifont/unifont.pcf
+    unset {C,CPP,CXX,LD}FLAGS
+    echo depends bli part_gpt > grub-core/extra_deps.lst
+    case $(uname -m) in i?86 )
+        tar xf ../gcc-14.2.0.tar.xz
+        mkdir gcc-14.2.0/build
+        pushd gcc-14.2.0/build
+            ../configure --prefix=$PWD/../../x86_64-gcc \
+                     --target=x86_64-linux-gnu      \
+                     --with-system-zlib             \
+                     --enable-languages=c,c++       \
+                     --with-ld=/usr/bin/ld
+            make all-gcc
+            make install-gcc
+        popd
+        export TARGET_CC=$PWD/x86_64-gcc/bin/x86_64-linux-gnu-gcc
+    esac
+    ./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --disable-efiemu     \
+            --enable-grub-mkfont \
+            --with-platform=efi  \
+            --target=x86_64      \
+            --disable-werror
+    unset TARGET_CC
+    make || make -j1
+}
+
+installpkg() {
+    cd grub-$pkgver
+    make DESTDIR=$DST install
+    mkdir -p $DST/usr/share/bash-completion/completions
+    mv -v $DST/etc/bash_completion.d/grub $DST/usr/share/bash-completion/completions
+}

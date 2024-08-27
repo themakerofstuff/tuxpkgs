@@ -34,7 +34,7 @@ buildpkg() {
 
 installpkg() {
     cd $pkgname-$pkgver/build
-    ninja install DESTDIR=$DST
+    DESTDIR=$DST ninja install
     mkdir -p $DST/usr/share/man
     tar -xf ../../systemd-man-pages-$pkgver.tar.xz \
     --no-same-owner --strip-components=1   \
