@@ -21,6 +21,7 @@ pushd $ROOT/usr/share/info
   done
 popd
 EOF
+    chmod +x $DST/usr/bin/update-info
 }
 
 postinstpkg() {
