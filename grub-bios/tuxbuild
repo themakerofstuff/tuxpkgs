@@ -1,0 +1,23 @@
+pkgname=grub-bios
+pkgver=2.12
+pkgurls=(https://ftp.gnu.org/gnu/grub/grub-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf grub-$pkgver.tar.xz
+    cd grub-$pkgver
+    unset {C,CPP,CXX,LD}FLAGS
+    echo depends bli part_gpt > grub-core/extra_deps.lst
+    ./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --disable-efiemu       \
+            --disable-werror
+    make || make -j1
+}
+
+installpkg() {
+    cd grub-$pkgver
+    make DESTDIR=$DST install
+    mkdir -p $DST/usr/share/bash-completion/completions
+    mv -v $DST/etc/bash_completion.d/grub $DST/usr/share/bash-completion/completions
+}

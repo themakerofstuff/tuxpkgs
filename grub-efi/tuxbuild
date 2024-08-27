@@ -1,0 +1,4 @@
+pkgname=grub-efi
+pkgver=2.12
+pkgurls=(https://ftp.gnu.org/gnu/grub/grub-$pkgver.tar.xz https://unifoundry.com/pub/unifont/unifont-15.1.05/font-builds/unifont-15.1.05.pcf.gz)
+depends=(efibootmgr freetype-circular)
