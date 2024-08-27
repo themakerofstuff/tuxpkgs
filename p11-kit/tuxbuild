@@ -25,7 +25,7 @@ EOF
 
 installpkg() {
     cd $pkgname-$pkgver/p11-bld
-    ninja DESTDIR=$DST install
+    DESTDIR=$DST ninja install
     mkdir -p $DST/usr/bin
     ln -sfv $DST/usr/libexec/p11-kit/trust-extract-compat \
         $DST/usr/bin/update-ca-certificates

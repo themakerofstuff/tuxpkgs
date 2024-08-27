@@ -14,5 +14,5 @@ buildpkg() {
 
 installpkg() {
     cd $pkgname-$pkgver/build
-    ninja DESTDIR=$DST install
+    DESTDIR=$DST ninja install
 }

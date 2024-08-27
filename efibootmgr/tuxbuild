@@ -1,0 +1,16 @@
+pkgname=efibootmgr
+pkgver=18
+pkgurls=(https://github.com/rhboot/efibootmgr/archive/$pkgver/efibootmgr-$pkgver.tar.gz)
+depends=(efivar popt)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    make EFIDIR=LFS EFI_LOADER=grubx64.efi
+}
+
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST EFIDIR=LFS install
+}
