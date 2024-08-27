@@ -8,6 +8,7 @@ buildpkg() {
 }
 
 installpkg() {
+    echo nameserver 1.1.1.1 > /etc/resolv.conf
     cat > $ROOT/etc/lsb-release << "EOF"
 DISTRIB_ID="TuxOS"
 DISTRIB_RELEASE="r12.1-138"

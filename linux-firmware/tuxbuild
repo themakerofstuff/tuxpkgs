@@ -1,0 +1,14 @@
+pkgname=linux-firmware
+pkgver=20240811
+pkgurls=(https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    echo -n
+}
+
+installpkg() {
+    mkdir -p $DST/lib
+    tar xf $pkgname-$pkgver.tar.gz -C $DST/lib
+    mv $DST/lib/$pkgname-$pkgver $DST/lib/firmware
+}
