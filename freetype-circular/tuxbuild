@@ -1,0 +1,12 @@
+pkgname=freetype-circular
+pkgver=2.13.3
+pkgurls=()
+depends=(freetype freetype-harfbuzz)
+
+buildpkg() {
+    echo -n
+}
+
+installpkg() {
+    echo -n
+}

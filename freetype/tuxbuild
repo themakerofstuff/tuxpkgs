@@ -1,0 +1,21 @@
+pkgname=freetype
+pkgver=2.13.3
+pkgurls=(https://downloads.sourceforge.net/freetype/freetype-$pkgver.tar.xz)
+depends=(libpng which)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg
+
+    sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
+        -i include/freetype/config/ftoption.h
+
+    ./configure --prefix=/usr --enable-freetype-config --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

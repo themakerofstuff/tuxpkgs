@@ -1,0 +1,52 @@
+pkgname=networkmanager
+pkgver=1.48.8
+pkgurls=(https://download.gnome.org/sources/NetworkManager/1.48/NetworkManager-$pkgver.tar.xz)
+depends=(libndp curl dhcpcd glib iptables libpsl newt nss polkit pygobject systemd-pam vala wpa-supplicant)
+
+buildpkg() {
+    tar xf NetworkManager-$pkgver.tar.xz
+    cd NetworkManager-$pkgver
+    grep -rl '^#!.*python$' | xargs sed -i '1s/python/&3/'
+    mkdir build
+    cd build
+    CXXFLAGS+="-O2 -fPIC"             \
+    meson setup ..                    \
+      --prefix=/usr               \
+      --buildtype=release         \
+      -D libaudit=no              \
+      -D nmtui=true               \
+      -D ovs=false                \
+      -D ppp=false                \
+      -D selinux=false            \
+      -D qt=false                 \
+      -D session_tracking=systemd \
+      -D modem_manager=false
+    ninja
+}
+
+installpkg() {
+    cd NetworkManager-$pkgver/build
+    DESTDIR=$DST ninja install
+    mv $DST/usr/share/doc/NetworkManager{,-1.48.8}
+    mkdir -p $DST/etc/NetworkManager/conf.d
+    cat >> $DST/etc/NetworkManager/NetworkManager.conf << "EOF"
+[main]
+plugins=keyfile
+EOF
+    cat > $DST/etc/NetworkManager/conf.d/polkit.conf << "EOF"
+[main]
+auth-polkit=true
+EOF
+}
+
+postinstpkg() {
+    cat > $ROOT/usr/share/polkit-1/rules.d/org.freedesktop.NetworkManager.rules << "EOF"
+polkit.addRule(function(action, subject) {
+    if (action.id.indexOf("org.freedesktop.NetworkManager.") == 0 && subject.isInGroup("netdev")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+    groupadd -fg 86 netdev
+    tux_info "Make sure to add your user to the netdev group"
+}

@@ -1,0 +1,21 @@
+pkgname=harfbuzz
+pkgver=9.0.0
+pkgurls=(https://github.com/harfbuzz/harfbuzz/releases/download/$pkgver/harfbuzz-$pkgver.tar.xz)
+depends=(glib graphite2 icu)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    mkdir build
+    cd build
+    meson setup ..             \
+      --prefix=/usr        \
+      --buildtype=release  \
+      -D graphite2=enabled
+    ninja
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    DESTDIR=$DST ninja install
+}

@@ -1,0 +1,26 @@
+pkgname=freetype-harfbuzz
+pkgver=2.13.3
+pkgurls=(https://downloads.sourceforge.net/freetype/freetype-$pkgver.tar.xz)
+depends=(harfbuzz libpng which)
+
+buildpkg() {
+    tar xf freetype-$pkgver.tar.xz
+    cd freetype-$pkgver
+    sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg
+
+    sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
+        -i include/freetype/config/ftoption.h
+
+    ./configure --prefix=/usr --enable-freetype-config --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd freetype-$pkgver
+    make DESTDIR=$DST install
+}
+
+postinstpkg() {
+    rm -rf $ROOT/etc/tux/installed/freetype
+    mv $ROOT/etc/tux/installed/freetype-harfbuzz $ROOT/etc/tux/installed/freetype
+}
