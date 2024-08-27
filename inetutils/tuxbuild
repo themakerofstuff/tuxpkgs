@@ -23,5 +23,6 @@ buildpkg() {
 installpkg() {
     cd $pkgname-$pkgver
     make DESTDIR=$DST install
+    mkdir -p $DST/usr/sbin
     mv -v $DST/usr/{,s}bin/ifconfig
 }

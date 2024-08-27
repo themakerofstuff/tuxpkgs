@@ -17,6 +17,7 @@ buildpkg() {
 installpkg() {
     cd $pkgname-$pkgver
     make DESTDIR=$DST install
+    mkdir -p $DST/usr/share/man/man8 $DST/usr/sbin
     mv -v $DST/usr/bin/chroot $DST/usr/sbin
     mv -v $DST/usr/share/man/man1/chroot.1 $DST/usr/share/man/man8/chroot.8
     sed -i 's/"1"/"8"/' $DST/usr/share/man/man8/chroot.8

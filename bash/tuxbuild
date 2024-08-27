@@ -1,10 +1,10 @@
 pkgname=bash
 pkgver=5.2.32
-pkgurls=(https://ftp.gnu.org/gnu/bash/bash-$pkgver.tar.xz)
+pkgurls=(https://ftp.gnu.org/gnu/bash/bash-$pkgver.tar.gz)
 depends=()
 
 buildpkg() {
-    tar xf $pkgname-$pkgver.tar.xz
+    tar xf $pkgname-$pkgver.tar.gz
     cd $pkgname-$pkgver
     ./configure --prefix=/usr             \
             --without-bash-malloc     \
