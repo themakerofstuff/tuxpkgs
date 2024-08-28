@@ -15,6 +15,6 @@ installpkg() {
 }
 
 postinstpkg() {
-    $ROOT/usr/sbin/make-ca -g
+    $ROOT/usr/sbin/make-ca -g --force
     systemctl enable update-pki.timer
 }
