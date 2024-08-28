@@ -1,0 +1,18 @@
+pkgname=python3-docutils
+pkgver=0.21.2
+pkgurls=(https://files.pythonhosted.org/packages/source/d/docutils/docutils-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf docutils-$pkgver.tar.gz
+    cd docutils-$pkgver
+    for f in $ROOT/usr/bin/rst*.py; do
+        rm -fv $ROOT/usr/bin/$(basename $f .py)
+    done
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+}
+
+installpkg() {
+    cd docutils-$pkgver
+    pip3 install --no-index --find-links=dist --root $DST --no-cache-dir --no-user docutils
+}

@@ -1,0 +1,18 @@
+pkgname=libxslt
+pkgver=1.1.42
+pkgurls=(https://download.gnome.org/sources/libxslt/1.1/libxslt-$pkgver.tar.xz)
+depends=(libxml2 docbook-xml docbook-xsl libgcrypt)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr                          \
+            --disable-static                       \
+            --docdir=/usr/share/doc/libxslt-$pkgver
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

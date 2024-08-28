@@ -1,0 +1,16 @@
+pkgname=icu
+pkgver=75.1
+pkgurls=(https://github.com/unicode-org/icu/releases/download/release-75-1/icu4c-75_1-src.tgz)
+depends=()
+
+buildpkg() {
+    tar xf icu4c-75_1-src.tgz
+    cd icu/source
+    ./configure --prefix=/usr
+    make || make -j1
+}
+
+installpkg() [
+    cd icu/souruces
+    make DESTDIR=$DST install
+]

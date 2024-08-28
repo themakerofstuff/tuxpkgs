@@ -1,7 +1,7 @@
 pkgname=networkmanager
 pkgver=1.48.8
 pkgurls=(https://download.gnome.org/sources/NetworkManager/1.48/NetworkManager-$pkgver.tar.xz)
-depends=(libndp curl dhcpcd glib iptables libpsl newt nss polkit pygobject systemd-pam vala wpa-supplicant)
+depends=(libndp curl dhcpcd glib iptables libpsl newt nss polkit python3-pygobject systemd-pam vala wpa-supplicant)
 
 buildpkg() {
     tar xf NetworkManager-$pkgver.tar.xz
@@ -48,5 +48,4 @@ polkit.addRule(function(action, subject) {
 });
 EOF
     groupadd -fg 86 netdev
-    tux_info "Make sure to add your user to the netdev group"
 }

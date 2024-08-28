@@ -1,7 +1,7 @@
 pkgname=harfbuzz
 pkgver=9.0.0
 pkgurls=(https://github.com/harfbuzz/harfbuzz/releases/download/$pkgver/harfbuzz-$pkgver.tar.xz)
-depends=(glib graphite2 icu)
+depends=(glib graphite2 icu freetype)
 
 buildpkg() {
     tar xf $pkgname-$pkgver.tar.xz

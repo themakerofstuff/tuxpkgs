@@ -1,0 +1,15 @@
+pkgname=python3-packaging
+pkgver=24.1
+pkgurls=(https://files.pythonhosted.org/packages/source/p/packaging/packaging-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf packaging-$pkgver.tar.gz
+    cd packaging-$pkgver
+    pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD
+}
+
+installpkg() {
+    cd packaging-$pkgver
+    pip3 install --no-index --find-links=dist --root $DST --no-cache-dir --no-user packaging
+}

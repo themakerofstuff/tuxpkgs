@@ -1,0 +1,17 @@
+pkgname=libuv
+pkgver=1.48.0
+pkgurls=(https://dist.libuv.org/dist/v${pkgver}/libuv-v${pkgver}.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-v${pkgver}.tar.gz
+    cd $pkgname-v${pkgver}
+    sh autogen.sh
+    ./configure --prefix=/usr --disable-static
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-v${pkgver}
+    make DESTDIR=$DST install
+}
