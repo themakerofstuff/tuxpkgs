@@ -1,5 +1,5 @@
 pkgname=mpfr
-pkgver=4.2.1
+pkgver=4.2.2
 pkgurls=(https://ftp.gnu.org/gnu/mpfr/mpfr-$pkgver.tar.xz)
 depends=()
 

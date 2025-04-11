@@ -1,5 +1,5 @@
 pkgname=patch
-pkgver=2.7.6
+pkgver=2.8
 pkgurls=(https://ftp.gnu.org/gnu/patch/patch-$pkgver.tar.xz)
 depends=()
 

@@ -1,5 +1,5 @@
 pkgname=diffutils
-pkgver=3.10
+pkgver=3.11
 pkgurls=(https://ftp.gnu.org/gnu/diffutils/diffutils-$pkgver.tar.xz)
 depends=()
 

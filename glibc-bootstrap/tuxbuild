@@ -1,5 +1,5 @@
 pkgname=glibc-bootstrap
-pkgver=2.40
+pkgver=2.41
 pkgurls=(https://ftp.gnu.org/gnu/glibc/glibc-${pkgver}.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/glibc-${pkgver}-fhs-1.patch)
 depends=()
 

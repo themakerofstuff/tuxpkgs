@@ -1,5 +1,5 @@
 pkgname=man-pages
-pkgver=6.9.1
+pkgver=6.13
 pkgurls=(https://www.kernel.org/pub/linux/docs/man-pages/man-pages-$pkgver.tar.xz)
 depends=()
 
@@ -11,5 +11,5 @@ buildpkg() {
 
 installpkg() {
     cd $pkgname-$pkgver
-    make prefix=/usr DESTDIR=$DST install
+    make -R GIT=false prefix=/usr DESTDIR=$DST install
 }

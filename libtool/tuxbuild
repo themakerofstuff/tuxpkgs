@@ -1,5 +1,5 @@
 pkgname=libtool
-pkgver=2.4.7
+pkgver=2.5.4
 pkgurls=(https://ftp.gnu.org/gnu/libtool/libtool-$pkgver.tar.xz)
 depends=()
 

@@ -1,8 +1,0 @@
-pk() {
-	cat > v << "DD"
-	hi
-DD
-	echo hi
-}
-
-pk

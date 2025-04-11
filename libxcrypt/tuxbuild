@@ -1,5 +1,5 @@
 pkgname=libxcrypt
-pkgver=4.4.36
+pkgver=4.4.38
 pkgurls=(https://github.com/besser82/libxcrypt/releases/download/v${pkgver}/libxcrypt-$pkgver.tar.xz)
 depends=()
 

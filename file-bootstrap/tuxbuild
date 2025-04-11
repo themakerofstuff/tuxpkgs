@@ -1,5 +1,5 @@
 pkgname=file-bootstrap
-pkgver=5.45
+pkgver=5.46
 pkgurls=(https://astron.com/pub/file/file-$pkgver.tar.gz)
 depends=()
 

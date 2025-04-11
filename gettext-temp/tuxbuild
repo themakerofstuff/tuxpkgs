@@ -1,5 +1,5 @@
 pkgname=gettext-temp
-pkgver=0.22.5
+pkgver=0.24
 pkgurls=(https://ftp.gnu.org/gnu/gettext/gettext-$pkgver.tar.xz)
 depends=()
 

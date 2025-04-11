@@ -1,6 +1,6 @@
 pkgname=glibc-init
-pkgver=2.40
-pkgurls=(https://ftp.gnu.org/gnu/glibc/glibc-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/glibc-$pkgver-fhs-1.patch https://www.iana.org/time-zones/repository/releases/tzdata2024a.tar.gz)
+pkgver=2.41
+pkgurls=(https://ftp.gnu.org/gnu/glibc/glibc-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/glibc-$pkgver-fhs-1.patch https://www.iana.org/time-zones/repository/releases/tzdata2025b.tar.gz)
 depends=()
 
 buildpkg() {

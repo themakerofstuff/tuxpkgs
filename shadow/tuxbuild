@@ -1,5 +1,5 @@
 pkgname=shadow
-pkgver=4.16.0
+pkgver=4.17.4
 pkgurls=(https://github.com/shadow-maint/shadow/releases/download/$pkgver/shadow-$pkgver.tar.xz)
 depends=()
 

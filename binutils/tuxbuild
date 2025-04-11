@@ -1,5 +1,5 @@
 pkgname=binutils
-pkgver=2.43.1
+pkgver=2.44
 pkgurls=(https://sourceware.org/pub/binutils/releases/binutils-$pkgver.tar.xz)
 depends=()
 

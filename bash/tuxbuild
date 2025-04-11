@@ -1,5 +1,5 @@
 pkgname=bash
-pkgver=5.2.32
+pkgver=5.2.37
 pkgurls=(https://ftp.gnu.org/gnu/bash/bash-$pkgver.tar.gz)
 depends=()
 

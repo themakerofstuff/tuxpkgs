@@ -1,5 +1,5 @@
 pkgname=linux-src
-pkgver=6.10.6
+pkgver=6.12.23
 pkgurls=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$pkgver.tar.xz)
 depends=()
 

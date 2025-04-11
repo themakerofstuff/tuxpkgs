@@ -1,5 +1,5 @@
 pkgname=coreutils-bootstrap
-pkgver=9.5
+pkgver=9.6
 pkgurls=(https://ftp.gnu.org/gnu/coreutils/coreutils-${pkgver}.tar.xz)
 depends=()
 

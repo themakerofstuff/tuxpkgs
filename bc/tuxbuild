@@ -1,5 +1,5 @@
 pkgname=bc
-pkgver=6.7.6
+pkgver=7.0.3
 pkgurls=(https://github.com/gavinhoward/bc/releases/download/$pkgver/bc-$pkgver.tar.xz)
 depends=()
 

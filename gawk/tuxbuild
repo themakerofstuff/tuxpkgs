@@ -1,5 +1,5 @@
 pkgname=gawk
-pkgver=5.3.0
+pkgver=5.3.1
 pkgurls=(https://ftp.gnu.org/gnu/gawk/gawk-$pkgver.tar.xz)
 depends=()
 

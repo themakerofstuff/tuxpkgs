@@ -1,6 +1,6 @@
 pkgname=util-linux-temp
-pkgver=2.40.2
-pkgurls=(https://www.kernel.org/pub/linux/utils/util-linux/v2.40/util-linux-$pkgver.tar.xz)
+pkgver=2.41
+pkgurls=(https://www.kernel.org/pub/linux/utils/util-linux/v2.41/util-linux-$pkgver.tar.xz)
 depends=()
 
 buildpkg() {

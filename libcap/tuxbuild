@@ -1,5 +1,5 @@
 pkgname=libcap
-pkgver=2.70
+pkgver=2.75
 pkgurls=(https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$pkgver.tar.xz)
 depends=()
 

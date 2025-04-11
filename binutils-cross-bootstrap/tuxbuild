@@ -1,5 +1,5 @@
 pkgname=binutils-cross-bootstrap
-pkgver=2.43.1
+pkgver=2.44
 pkgurls=(https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz)
 depends=()
 

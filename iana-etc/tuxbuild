@@ -1,5 +1,5 @@
 pkgname=iana-etc
-pkgver=20240806
+pkgver=20250328
 pkgurls=(https://github.com/Mic92/iana-etc/releases/download/$pkgver/iana-etc-$pkgver.tar.gz)
 depends=()
 

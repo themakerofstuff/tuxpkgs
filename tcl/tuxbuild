@@ -1,5 +1,5 @@
 pkgname=tcl
-pkgver=8.6.14
+pkgver=8.6.16
 pkgurls=(https://downloads.sourceforge.net/tcl/tcl${pkgver}-src.tar.gz https://downloads.sourceforge.net/tcl/tcl${pkgver}-html.tar.gz)
 depends=()
 

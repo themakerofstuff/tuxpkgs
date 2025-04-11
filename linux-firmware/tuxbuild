@@ -1,5 +1,5 @@
 pkgname=linux-firmware
-pkgver=20240811
+pkgver=20250410
 pkgurls=(https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-$pkgver.tar.gz)
 depends=()
 

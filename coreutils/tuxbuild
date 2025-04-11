@@ -1,6 +1,6 @@
 pkgname=coreutils
-pkgver=9.5
-pkgurls=(https://ftp.gnu.org/gnu/coreutils/coreutils-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/coreutils-$pkgver-i18n-2.patch)
+pkgver=9.6
+pkgurls=(https://ftp.gnu.org/gnu/coreutils/coreutils-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/coreutils-$pkgver-i18n-1.patch)
 depends=()
 
 buildpkg() {

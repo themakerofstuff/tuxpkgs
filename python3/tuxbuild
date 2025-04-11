@@ -1,5 +1,5 @@
 pkgname=python3
-pkgver=3.12.5
+pkgver=3.13.2
 pkgurls=(https://www.python.org/ftp/python/$pkgver/Python-$pkgver.tar.xz)
 depends=()
 

@@ -1,5 +1,5 @@
 pkgname=texinfo
-pkgver=7.1
+pkgver=7.2
 pkgurls=(https://ftp.gnu.org/gnu/texinfo/texinfo-$pkgver.tar.xz)
 depends=()
 
