@@ -1,5 +1,5 @@
 pkgname=gnupg
-pkgver=2.4.5
+pkgver=2.4.7
 pkgurls=(https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-$pkgver.tar.bz2)
 depends=(libassuan libgcrypt libksba npth openldap gnutls pinentry)
 

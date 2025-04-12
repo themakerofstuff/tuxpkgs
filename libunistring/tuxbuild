@@ -1,5 +1,5 @@
 pkgname=libunistring
-pkgver=1.2
+pkgver=1.3
 pkgurls=(https://ftp.gnu.org/gnu/libunistring/libunistring-$pkgver.tar.xz)
 depends=()
 

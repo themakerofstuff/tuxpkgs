@@ -1,5 +1,5 @@
 pkgname=rsync-bootstrap
-pkgver=3.3.0
+pkgver=3.4.1
 pkgurls=(https://samba.org/ftp/rsync/src/rsync-$pkgver.tar.gz)
 depends=(popt-bootstrap)
 

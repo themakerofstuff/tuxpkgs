@@ -1,15 +1,15 @@
 pkgname=efivar
 pkgver=39
 pkgurls=(https://github.com/rhboot/efivar/archive/$pkgver/efivar-$pkgver.tar.gz)
-depends=(mandoc)
+depends=()
 
 buildpkg() {
     tar xf $pkgname-$pkgver.tar.gz
     cd $pkgname-$pkgver
-    make || make -j1
+    make ENABLE_DOCS=0 || make ENABLE_DOCS=0 -j1
 }
 
 installpkg() {
     cd $pkgname-$pkgver
-    make LIBDIR=/usr/lib DESTDIR=$DST install
+    make ENABLE_DOCS=0 LIBDIR=/usr/lib DESTDIR=$DST install
 }

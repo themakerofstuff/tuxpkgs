@@ -1,5 +1,5 @@
 pkgname=nghttp2
-pkgver=1.62.1
+pkgver=1.65.0
 pkgurls=(https://github.com/nghttp2/nghttp2/releases/download/v${pkgver}/nghttp2-$pkgver.tar.xz)
 depends=(libxml2)
 

@@ -1,5 +1,5 @@
 pkgname=python3-packaging
-pkgver=24.1
+pkgver=24.2
 pkgurls=(https://files.pythonhosted.org/packages/source/p/packaging/packaging-$pkgver.tar.gz)
 depends=()
 

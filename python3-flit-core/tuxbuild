@@ -1,5 +1,5 @@
 pkgname=python3-flit-core
-pkgver=3.9.0
+pkgver=3.12.0
 pkgurls=(https://pypi.org/packages/source/f/flit-core/flit_core-$pkgver.tar.gz)
 depends=()
 

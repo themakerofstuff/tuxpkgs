@@ -1,5 +1,5 @@
 pkgname=libxslt
-pkgver=1.1.42
+pkgver=1.1.43
 pkgurls=(https://download.gnome.org/sources/libxslt/1.1/libxslt-$pkgver.tar.xz)
 depends=(libxml2 docbook-xml docbook-xsl libgcrypt)
 

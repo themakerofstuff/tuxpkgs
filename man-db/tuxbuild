@@ -1,5 +1,5 @@
 pkgname=man-db
-pkgver=2.12.1
+pkgver=2.13.0
 pkgurls=(https://download.savannah.gnu.org/releases/man-db/man-db-$pkgver.tar.xz)
 depends=()
 

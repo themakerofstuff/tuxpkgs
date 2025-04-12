@@ -1,5 +1,5 @@
 pkgname=libgpg-error
-pkgver=1.50
+pkgver=1.53
 pkgurls=(https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-$pkgver.tar.bz2)
 depends=()
 

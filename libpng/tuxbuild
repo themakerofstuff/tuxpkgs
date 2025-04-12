@@ -1,5 +1,5 @@
 pkgname=libpng
-pkgver=1.6.43
+pkgver=1.6.47
 pkgurls=(https://downloads.sourceforge.net/libpng/libpng-$pkgver.tar.xz https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-$pkgver-apng.patch.gz)
 depends=()
 

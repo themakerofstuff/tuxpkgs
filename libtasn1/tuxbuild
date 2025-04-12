@@ -1,5 +1,5 @@
 pkgname=libtasn1
-pkgver=4.19.0
+pkgver=4.20.0
 pkgurls=(https://ftp.gnu.org/gnu/libtasn1/libtasn1-$pkgver.tar.gz)
 depends=()
 

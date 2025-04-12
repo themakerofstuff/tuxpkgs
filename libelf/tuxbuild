@@ -1,5 +1,5 @@
 pkgname=libelf
-pkgver=0.191
+pkgver=0.192
 pkgurls=(https://sourceware.org/ftp/elfutils/$pkgver/elfutils-$pkgver.tar.bz2)
 depends=()
 

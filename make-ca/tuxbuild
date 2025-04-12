@@ -1,5 +1,5 @@
 pkgname=make-ca
-pkgver=1.14
+pkgver=1.16
 pkgurls=(https://github.com/lfs-book/make-ca/archive/v${pkgver}/make-ca-$pkgver.tar.gz)
 depends=(p11-kit)
 

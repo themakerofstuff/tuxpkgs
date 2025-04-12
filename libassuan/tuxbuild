@@ -1,5 +1,5 @@
 pkgname=libassuan
-pkgver=3.0.1
+pkgver=3.0.2
 pkgurls=(https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-$pkgver.tar.bz2)
 depends=(libgpg-error)
 

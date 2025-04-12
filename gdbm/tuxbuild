@@ -1,5 +1,5 @@
 pkgname=gdbm
-pkgver=1.24
+pkgver=1.25
 pkgurls=(https://ftp.gnu.org/gnu/gdbm/gdbm-$pkgver.tar.gz)
 depends=()
 

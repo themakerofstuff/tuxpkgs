@@ -1,5 +1,5 @@
 pkgname=inetutils
-pkgver=2.5
+pkgver=2.6
 pkgurls=(https://ftp.gnu.org/gnu/inetutils/inetutils-$pkgver.tar.xz)
 depends=()
 

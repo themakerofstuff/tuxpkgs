@@ -1,5 +1,5 @@
 pkgname=python3-setuptools
-pkgver=72.2.0
+pkgver=78.1.0
 pkgurls=(https://pypi.org/packages/source/s/setuptools/setuptools-$pkgver.tar.gz)
 depends=()
 

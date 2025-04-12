@@ -1,5 +1,5 @@
 pkgname=less
-pkgver=661
+pkgver=668
 pkgurls=(https://www.greenwoodsoftware.com/less/less-$pkgver.tar.gz)
 depends=()
 

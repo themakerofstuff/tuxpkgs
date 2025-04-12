@@ -1,6 +1,6 @@
 pkgname=networkmanager
-pkgver=1.48.8
-pkgurls=(https://download.gnome.org/sources/NetworkManager/1.48/NetworkManager-$pkgver.tar.xz)
+pkgver=1.52.0
+pkgurls=(https://download.gnome.org/sources/NetworkManager/1.52/NetworkManager-$pkgver.tar.xz)
 depends=(libndp curl dhcpcd glib iptables libpsl newt nss polkit python3-pygobject systemd-pam vala wpa-supplicant)
 
 buildpkg() {
@@ -19,7 +19,7 @@ buildpkg() {
       -D ppp=false                \
       -D selinux=false            \
       -D qt=false                 \
-      -D session_tracking=systemd \
+      -D session_tracking=systemd -D nm_cloud_setup=false \
       -D modem_manager=false
     ninja
 }

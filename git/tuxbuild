@@ -1,5 +1,5 @@
 pkgname=git
-pkgver=2.46.0
+pkgver=2.49.0
 pkgurls=(https://www.kernel.org/pub/software/scm/git/git-$pkgver.tar.xz)
 depends=(curl pcre2 gnupg)
 

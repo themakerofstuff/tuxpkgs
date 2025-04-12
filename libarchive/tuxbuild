@@ -1,5 +1,5 @@
 pkgname=libarchive
-pkgver=3.7.4
+pkgver=3.7.9
 pkgurls=(https://github.com/libarchive/libarchive/releases/download/v${pkgver}/libarchive-$pkgver.tar.xz)
 depends=(libxml2 nettle pcre2)
 

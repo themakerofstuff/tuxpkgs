@@ -1,5 +1,5 @@
 pkgname=python3-wheel
-pkgver=0.44.0
+pkgver=0.45.1
 pkgurls=(https://pypi.org/packages/source/w/wheel/wheel-$pkgver.tar.gz)
 depends=()
 

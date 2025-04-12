@@ -1,5 +1,5 @@
 pkgname=systemd
-pkgver=256.4
+pkgver=257.3
 pkgurls=(https://github.com/systemd/systemd/archive/v${pkgver}/systemd-$pkgver.tar.gz https://anduin.linuxfromscratch.org/LFS/systemd-man-pages-$pkgver.tar.xz)
 depends=()
 

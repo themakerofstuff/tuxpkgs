@@ -1,5 +1,5 @@
 pkgname=iproute2
-pkgver=6.10.0
+pkgver=6.13.0
 pkgurls=(https://www.kernel.org/pub/linux/utils/net/iproute2/iproute2-$pkgver.tar.xz)
 depends=()
 

@@ -1,6 +1,6 @@
 pkgname=libxml2
-pkgver=2.13.3
-pkgurls=(https://download.gnome.org/sources/libxml2/2.13/libxml2-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/blfs/svn/libxml2-$pkgver-upstream_fix-2.patch)
+pkgver=2.14.1
+pkgurls=(https://download.gnome.org/sources/libxml2/2.14/libxml2-$pkgver.tar.xz)
 depends=(icu)
 
 buildpkg() {

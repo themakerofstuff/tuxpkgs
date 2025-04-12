@@ -1,5 +1,5 @@
 pkgname=curl
-pkgver=8.9.1
+pkgver=8.13.0
 pkgurls=(https://curl.se/download/curl-$pkgver.tar.xz)
 depends=(libpsl make-ca libidn2)
 

@@ -1,5 +1,5 @@
 pkgname=gnutls
-pkgver=3.8.7.1
+pkgver=3.8.9
 pkgurls=(https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-$pkgver.tar.xz)
 depends=(nettle make-ca libunistring libtasn1 p11-kit)
 

@@ -1,5 +1,5 @@
 pkgname=libpipeline
-pkgver=1.5.7
+pkgver=1.5.8
 pkgurls=(https://download.savannah.gnu.org/releases/libpipeline/libpipeline-$pkgver.tar.gz)
 depends=()
 

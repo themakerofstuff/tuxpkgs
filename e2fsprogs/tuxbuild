@@ -1,5 +1,5 @@
 pkgname=e2fsprogs
-pkgver=1.47.1
+pkgver=1.47.2
 pkgurls=(https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs/v${pkgver}/e2fsprogs-$pkgver.tar.gz)
 depends=()
 

@@ -1,5 +1,5 @@
 pkgname=which
-pkgver=2.21
+pkgver=2.23
 pkgurls=(https://ftp.gnu.org/gnu/which/which-$pkgver.tar.gz)
 depends=()
 

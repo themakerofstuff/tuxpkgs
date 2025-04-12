@@ -1,7 +1,7 @@
 pkgname=docbook-xml
 pkgver=4.5
 pkgurls=(https://www.docbook.org/xml/$pkgver/docbook-xml-$pkgver.zip)
-depends=(libxml2 unzip)
+depends=(libxml2 libarchive)
 
 buildpkg() {
     mkdir docbook-xml

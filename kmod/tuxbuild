@@ -1,26 +1,18 @@
 pkgname=kmod
-pkgver=33
+pkgver=34.2
 pkgurls=(https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$pkgver.tar.xz)
 depends=()
 
 buildpkg() {
     tar xf $pkgname-$pkgver.tar.xz
     cd $pkgname-$pkgver
-    ./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --with-openssl    \
-            --with-xz         \
-            --with-zstd       \
-            --with-zlib       \
-            --disable-manpages
-    make || make -j1
+    mkdir build
+    cd build
+    meson setup --prefix=/usr --buildtype=release -D manpages=false ..
+    ninja || ninja -j1
 }
 
 installpkg() {
-    cd $pkgname-$pkgver
-    make DESTDIR=$DST install
-    for target in depmod insmod modinfo modprobe rmmod; do
-        ln -sfv ../bin/kmod $DST/usr/sbin/$target
-        rm -fv $DST/usr/bin/$target
-    done
+    cd $pkgname-$pkgver/build
+    DESTDIR=$DST ninja install
 }

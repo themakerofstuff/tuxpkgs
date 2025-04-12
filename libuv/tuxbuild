@@ -1,5 +1,5 @@
 pkgname=libuv
-pkgver=1.48.0
+pkgver=1.50.0
 pkgurls=(https://dist.libuv.org/dist/v${pkgver}/libuv-v${pkgver}.tar.gz)
 depends=()
 

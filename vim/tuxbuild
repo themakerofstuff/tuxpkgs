@@ -1,5 +1,5 @@
 pkgname=vim
-pkgver=9.1.0660
+pkgver=9.1.1263
 pkgurls=(https://github.com/vim/vim/archive/v${pkgver}/vim-$pkgver.tar.gz)
 depends=()
 

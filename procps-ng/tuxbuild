@@ -1,5 +1,5 @@
 pkgname=procps-ng
-pkgver=4.0.4
+pkgver=4.0.5
 pkgurls=(https://sourceforge.net/projects/procps-ng/files/Production/procps-ng-$pkgver.tar.xz)
 depends=()
 
@@ -9,7 +9,7 @@ buildpkg() {
     ./configure --prefix=/usr                           \
             --docdir=/usr/share/doc/procps-ng-$pkgver \
             --disable-static                        \
-            --disable-kill                          \
+            --disable-kill --enable-watch8bit                          \
             --with-systemd
     make src_w_LDADD='$(LDADD) -lsystemd' || make src_w_LDADD='$(LDADD) -lsystemd' -j1
 }

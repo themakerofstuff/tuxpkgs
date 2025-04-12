@@ -1,6 +1,6 @@
 pkgname=glib
-pkgver=2.80.4
-pkgurls=(https://download.gnome.org/sources/glib/2.80/glib-$pkgver.tar.xz https://download.gnome.org/sources/gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz)
+pkgver=2.84.1
+pkgurls=(https://download.gnome.org/sources/glib/2.84/glib-$pkgver.tar.xz https://download.gnome.org/sources/gobject-introspection/1.84/gobject-introspection-1.84.0.tar.xz)
 depends=(python3-packaging python3-docutils libxslt pcre2)
 
 buildpkg() {

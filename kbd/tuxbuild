@@ -1,5 +1,5 @@
 pkgname=kbd
-pkgver=2.6.4
+pkgver=2.7.1
 pkgurls=(https://www.kernel.org/pub/linux/utils/kbd/kbd-$pkgver.tar.xz https://www.linuxfromscratch.org/patches/lfs/development/kbd-$pkgver-backspace-1.patch)
 depends=()
 

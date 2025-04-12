@@ -1,5 +1,5 @@
 pkgname=pcre2
-pkgver=10.44
+pkgver=10.45
 pkgurls=(https://github.com/PCRE2Project/pcre2/releases/download/pcre2-$pkgver/pcre2-$pkgver.tar.bz2)
 depends=()
 

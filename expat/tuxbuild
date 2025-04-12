@@ -1,5 +1,5 @@
 pkgname=expat
-pkgver=2.6.2
+pkgver=2.7.1
 pkgurls=(https://prdownloads.sourceforge.net/expat/expat-$pkgver.tar.xz)
 depends=()
 
