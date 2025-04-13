@@ -96,7 +96,7 @@ postinstpkg() {
     localedef -i zh_CN -f GB18030 zh_CN.GB18030
     localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
     localedef -i zh_TW -f UTF-8 zh_TW.UTF-8
-    tar -xf ../../tzdata2024a.tar.gz
+    tar -xf ../../tzdata2025b.tar.gz
 
     ZONEINFO=$ROOT/usr/share/zoneinfo
     mkdir -pv $ZONEINFO/{posix,right}
