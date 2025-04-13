@@ -1,0 +1,31 @@
+pkgname=nss
+pkgver=3.110
+pkgurls=(https://archive.mozilla.org/pub/security/nss/releases/NSS_3_110_RTM/src/nss-$pkgver.tar.gz https://www.linuxfromscratch.org/patches/blfs/svn/nss-standalone-1.patch)
+depends=(nspr sqlite p11-kit)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    patch -Np1 -i ../nss-standalone-1.patch
+    cd nss
+    make BUILD_OPT=1                      \
+    NSPR_INCLUDE_DIR=/usr/include/nspr  \
+    USE_SYSTEM_ZLIB=1                   \
+    ZLIB_LIBS=-lz                       \
+    NSS_ENABLE_WERROR=0 NSS_USE_SYSTEM_SQLITE=1 NSS_DISABLE_GTESTS=1  \
+    $([ $(uname -m) = x86_64 ] && echo USE_64=1)
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/dist
+    install -vdm755 $DST/usr/lib
+    install -vdm755 $DST/usr/include/nss
+    install -vdm755 $DST/usr/bin
+    install -vdm755 $DST/usr/lib/pkgconfig
+
+    install -v -m755 Linux*/lib/*.so $DST/usr/lib
+    install -v -m644 Linux*/lib/{*.chk,libcrmf.a} $DST/usr/lib
+    cp -v -RL {public,private}/nss/* $DST/usr/include/nss
+    install -v -m755 Linux*/bin/{certutil,nss-config,pk12util} /usr/bin
+    install -v -m644 Linux*/lib/pkgconfig/nss.pc  /usr/lib/pkgconfig
+}

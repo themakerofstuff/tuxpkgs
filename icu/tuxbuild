@@ -10,7 +10,7 @@ buildpkg() {
     make || make -j1
 }
 
-installpkg() [
+installpkg() {
     cd icu/source
     make DESTDIR=$DST install
-]
+}

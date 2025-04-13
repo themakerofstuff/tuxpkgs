@@ -1,0 +1,16 @@
+pkgname=duktape
+pkgver=2.7.0
+pkgurls=(https://duktape.org/duktape-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    sed -i 's/-Os/-O2/' Makefile.sharedlibrary
+    make -f Makefile.sharedlibrary INSTALL_PREFIX=/usr DESTDIR=$DST
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make -f Makefile.sharedlibrary INSTALL_PREFIX=/usr DESTDIR=$DST install
+}

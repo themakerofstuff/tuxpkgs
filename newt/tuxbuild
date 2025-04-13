@@ -1,0 +1,23 @@
+pkgname=newt
+pkgver=0.52.25
+pkgurls=(https://releases.pagure.org/newt/newt-$pkgver.tar.gz)
+depends=(popt slang)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    sed -e '/install -m 644 $(LIBNEWT)/ s/^/#/' \
+    -e '/$(LIBNEWT):/,/rv/ s/^/#/'          \
+    -e 's/$(LIBNEWT)/$(LIBNEWTSH)/g'        \
+    -i Makefile.in
+
+    ./configure --prefix=/usr           \
+            --with-gpm-support      \
+            --with-python=python3.13
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

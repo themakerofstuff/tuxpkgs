@@ -1,0 +1,20 @@
+pkgname=python3-pygobject
+pkgver=3.52.3
+pkgurls=(https://download.gnome.org/sources/pygobject/3.52/pygobject-$pkgver.tar.gz)
+depends=(glib)
+
+buildpkg() {
+    tar xf pygobject-$pkgver.tar.gz
+    cd pygobject-$pkgver
+    mv -v tests/test_gdbus.py{,.nouse}
+    mv -v tests/test_overrides_gtk.py{,.nouse}
+    mkdir build
+    cd build
+    meson setup --prefix=/usr --buildtype=release -D pycairo=disabled ..
+    ninja || ninja -j1
+}
+
+installpkg() {
+    cd pygobject-$pkgver/build
+    DESTDIR=$DST ninja install
+}

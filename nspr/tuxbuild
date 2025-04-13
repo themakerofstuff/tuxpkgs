@@ -1,0 +1,21 @@
+pkgname=nspr
+pkgver=4.36
+pkgurls=(https://archive.mozilla.org/pub/nspr/releases/v${pkgver}/src/nspr-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver/nspr
+    sed -i '/^RELEASE/s|^|#|' pr/src/misc/Makefile.in
+    sed -i 's|$(LIBRARY) ||'  config/rules.mk
+    ./configure --prefix=/usr   \
+            --with-mozilla  \
+            --with-pthreads \
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit)
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/nspr
+    make DESTDIR=$DST install
+}

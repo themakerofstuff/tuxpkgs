@@ -1,0 +1,16 @@
+pkgname=vala
+pkgver=0.56.18
+pkgurls=(https://download.gnome.org/sources/vala/0.56/vala-$pkgver.tar.xz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.xz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr --disable-valadoc
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

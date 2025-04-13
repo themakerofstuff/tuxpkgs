@@ -1,0 +1,26 @@
+pkgname=polkit
+pkgver=126
+pkgurls=(https://github.com/polkit-org/polkit/archive/$pkgver/polkit-$pkgver.tar.gz)
+depends=(duktape glib libxslt systemd-pam)
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    groupadd -fg 27 polkitd &&
+    useradd -c "PolicyKit Daemon Owner" -d /etc/polkit-1 -u 27 \
+        -g polkitd -s /bin/false polkitd
+    mkdir build
+    cd build
+    meson setup ..                   \
+      --prefix=/usr              \
+      --buildtype=release        \
+      -D man=true                \
+      -D session_tracking=logind \
+      -D tests=true
+    ninja || ninja -j1
+}
+
+installpkg() {
+    cd $pkgname-$pkgver/build
+    DESTDIR=$DST ninja install
+}

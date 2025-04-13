@@ -1,0 +1,19 @@
+pkgname=libnl
+pkgver=3.11.0
+pkgurls=(https://github.com/thom311/libnl/releases/download/libnl3_11_0/libnl-$pkgver.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-$pkgver.tar.gz
+    cd $pkgname-$pkgver
+    ./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-static
+    make || make -j1
+    reset
+}
+
+installpkg() {
+    cd $pkgname-$pkgver
+    make DESTDIR=$DST install
+}

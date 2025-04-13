@@ -1,0 +1,22 @@
+pkgname=sqlite
+pkgver=3.49.1
+pkgurls=(https://sqlite.org/2025/sqlite-autoconf-3490100.tar.gz)
+depends=()
+
+buildpkg() {
+    tar xf $pkgname-autoconf-3490100.tar.gz
+    cd $pkgname-autoconf-3490100
+    ./configure --prefix=/usr     \
+            --disable-static  \
+            --enable-fts{4,5} \
+            CPPFLAGS="-D SQLITE_ENABLE_COLUMN_METADATA=1 \
+                      -D SQLITE_ENABLE_UNLOCK_NOTIFY=1   \
+                      -D SQLITE_ENABLE_DBSTAT_VTAB=1     \
+                      -D SQLITE_SECURE_DELETE=1"
+    make || make -j1
+}
+
+installpkg() {
+    cd $pkgname-autoconf-3490100
+    make DESTDIR=$DST install
+}
